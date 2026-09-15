@@ -1,0 +1,18 @@
+document.addEventListener('DOMContentLoaded',()=>{
+  const modal=document.querySelector('#searchModal');
+  const input=document.querySelector('#searchInput');
+  const results=document.querySelector('#searchResults');
+  const openers=document.querySelectorAll('[data-search-open]');
+  const close=document.querySelector('[data-search-close]');
+  const data=[
+    ['RexPlay','Ranked até o Top 1','Gaming','ao-vivo.html'],['Lua Vibes','Live Session','Música','ao-vivo.html'],['MikeZone','Conversando com vocês','Just Chatting','ao-vivo.html'],['SkyCode','Construindo do zero','Tecnologia','ao-vivo.html'],['Gaming','Explore transmissões de jogos','Categoria','categorias.html?categoria=gaming'],['Música','Shows, DJs e sessões musicais','Categoria','categorias.html?categoria=musica'],['Tecnologia','Programação e desenvolvimento','Categoria','categorias.html?categoria=tecnologia'],['Criatividade','Arte e criação ao vivo','Categoria','categorias.html?categoria=criatividade']
+  ];
+  function render(q=''){if(!results)return;const s=q.trim().toLowerCase();if(!s){results.innerHTML='<div class="empty">Comece digitando para pesquisar.</div>';return}const found=data.filter(x=>x.join(' ').toLowerCase().includes(s));results.innerHTML=found.length?found.map(x=>`<a class="result" href="${x[3]}"><strong>${x[0]}</strong><br><small>${x[1]} • ${x[2]}</small></a>`).join(''):`<div class="empty">Nenhum resultado encontrado.</div>`}
+  openers.forEach(b=>b.addEventListener('click',()=>{modal?.classList.add('open');setTimeout(()=>input?.focus(),50)}));
+  close?.addEventListener('click',()=>modal?.classList.remove('open')); modal?.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('open')}); input?.addEventListener('input',e=>render(e.target.value)); document.addEventListener('keydown',e=>{if(e.key==='Escape')modal?.classList.remove('open')}); render();
+  document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));btn.classList.add('active');const cat=btn.dataset.filter;document.querySelectorAll('.stream-card').forEach(card=>card.style.display=(cat==='todos'||card.dataset.category===cat)?'':'none')}));
+  const liveSearch=document.querySelector('#liveSearch'); liveSearch?.addEventListener('input',()=>{const q=liveSearch.value.toLowerCase();document.querySelectorAll('.stream-card').forEach(card=>{const ok=card.dataset.search?.includes(q);card.style.display=ok?'':'none'})});
+  document.querySelectorAll('[data-demo-form]').forEach(form=>form.addEventListener('submit',e=>{e.preventDefault();const msg=form.querySelector('.form-message');if(msg)msg.textContent=form.dataset.demoForm==='login'?'Login demonstrativo realizado.':'Conta demonstrativa criada. Agora você pode continuar no Zytrix.'}));
+  document.querySelectorAll('[data-coin]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('[data-coin]').forEach(x=>x.classList.remove('active'));btn.classList.add('active');const out=document.querySelector('#coinMessage');if(out)out.textContent=`Apoio selecionado: ◈ ${btn.dataset.coin} Zy Coins.`}));
+  const chatForm=document.querySelector('#chatForm');chatForm?.addEventListener('submit',e=>{e.preventDefault();const i=chatForm.querySelector('input');if(!i.value.trim())return;const body=document.querySelector('.chat-body');const p=document.createElement('div');p.className='chat-msg';p.innerHTML=`<b>Você</b> ${i.value.replace(/[<>]/g,'')}`;body.appendChild(p);body.scrollTop=body.scrollHeight;i.value=''});
+});
