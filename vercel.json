@@ -132,38 +132,6 @@
     {
       "source": "/admin",
       "destination": "/admin.html"
-    },
-    {
-      "source": "/termos",
-      "destination": "/termos.html"
-    },
-    {
-      "source": "/privacidade",
-      "destination": "/privacidade.html"
-    },
-    {
-      "source": "/diretrizes-da-comunidade",
-      "destination": "/diretrizes-da-comunidade.html"
-    },
-    {
-      "source": "/denuncias-e-moderacao",
-      "destination": "/denuncias-e-moderacao.html"
-    },
-    {
-      "source": "/conteudo-proibido",
-      "destination": "/conteudo-proibido.html"
-    },
-    {
-      "source": "/politicas",
-      "destination": "/politicas.html"
-    },
-    {
-      "source": "/denunciar",
-      "destination": "/denunciar.html"
-    },
-    {
-      "source": "/moderacao",
-      "destination": "/moderacao.html"
     }
   ]
 }
