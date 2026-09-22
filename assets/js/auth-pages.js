@@ -7,6 +7,7 @@ footer();
 const form = document.querySelector('form[data-auth-form]');
 const msg = document.querySelector('#message');
 const mode = form?.dataset.mode;
+const requestedRedirect = new URLSearchParams(location.search).get('redirect');
 await prepareAcceptance(form);
 function show(text, type = 'err') { if (!msg)
     return; msg.textContent = text; msg.className = `message ${type}`; msg.classList.remove('hidden'); }
@@ -42,7 +43,7 @@ form?.addEventListener('submit', async (e) => {
         if (mode === 'login') {
             const cred = await signInWithEmailAndPassword(auth, String(fd.get('email')), String(fd.get('password')));
             await ensureDocs(cred.user, cred.user.displayName || 'Usuário', 'password');
-            location.href = localRedirect(new URLSearchParams(location.search).get('redirect'), 'index.html');
+            location.href = localRedirect(requestedRedirect, 'index.html');
         }
         if (mode === 'register') {
             requireAcceptanceBeforeSignup();
@@ -57,7 +58,7 @@ form?.addEventListener('submit', async (e) => {
             await ensureDocs(cred.user, name, 'password');
             await sendEmailVerification(cred.user);
             show('Conta criada. Enviamos um e-mail de verificação.', 'ok');
-            setTimeout(() => location.href = 'index.html', 1200);
+            setTimeout(() => location.href = localRedirect(requestedRedirect, 'index.html'), 1200);
         }
         if (mode === 'reset') {
             await sendPasswordResetEmail(auth, String(fd.get('email'))).catch(() => {});
@@ -93,7 +94,7 @@ googleButton?.addEventListener('click', async () => {
                 return;
             }
         }
-        location.href = localRedirect(new URLSearchParams(location.search).get('redirect'), 'index.html');
+        location.href = localRedirect(requestedRedirect, 'index.html');
     }
     catch (err) {
         console.warn('Falha no login Google.', err?.code || err?.name || 'unknown');

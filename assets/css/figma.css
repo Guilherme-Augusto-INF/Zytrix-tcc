@@ -1,0 +1,2298 @@
+@font-face {
+  font-family: "Rajdhani";
+  src: url("../fonts/rajdhani-400.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rajdhani";
+  src: url("../fonts/rajdhani-600.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rajdhani";
+  src: url("../fonts/rajdhani-700.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Teko";
+  src: url("../fonts/teko-600-700.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600 700;
+  font-display: swap;
+}
+
+:root {
+  --figma-bg: #030912;
+  --figma-bg-soft: #07101a;
+  --figma-panel: #0d1724;
+  --figma-panel-2: #101c2a;
+  --figma-line: #223142;
+  --figma-line-soft: #152335;
+  --figma-text: #f7fbff;
+  --figma-muted: #aab0ba;
+  --figma-cyan: #50c8f0;
+  --figma-cyan-strong: #3baed8;
+  --figma-red: #f72555;
+  --figma-display: "Rajdhani", "Bahnschrift SemiCondensed", "Arial Narrow", sans-serif;
+  --figma-display-strong: "Teko", "Rajdhani", "Arial Narrow", sans-serif;
+}
+
+body.figma-page {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(circle at 52% 4%, rgba(22, 55, 82, .12), transparent 34%),
+    linear-gradient(180deg, #02070e 0%, var(--figma-bg) 54%, #030912 100%);
+  color: var(--figma-text);
+  font-family: Inter, Arial, sans-serif;
+}
+
+.figma-container {
+  width: min(1200px, calc(100% - 42px));
+  margin-inline: auto;
+}
+
+.figma-header.site-header {
+  position: relative;
+  top: auto;
+  z-index: 40;
+  border-bottom: 1px solid rgba(149, 160, 171, .38);
+  background: rgba(2, 7, 14, .98);
+  backdrop-filter: none;
+}
+
+.figma-nav {
+  display: grid;
+  grid-template-columns: 250px 1fr 250px;
+  align-items: center;
+  min-height: 84px;
+  gap: 20px;
+}
+
+.figma-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  width: max-content;
+  color: #fff;
+  text-decoration: none;
+}
+
+.figma-brand-mark {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 11px;
+  background: linear-gradient(145deg, #61d2f4, #35a8d3);
+  color: #041019;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.16);
+  font: 900 31px/1 Arial, sans-serif;
+}
+
+.figma-brand-name {
+  font: 700 35px/1 Georgia, "Times New Roman", serif;
+  letter-spacing: -.7px;
+}
+
+.figma-nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+}
+
+.figma-nav-links a {
+  color: #8f9299;
+  font-size: 16px;
+  text-decoration: underline;
+  text-decoration-color: rgba(143, 146, 153, .45);
+  text-underline-offset: 3px;
+  transition: color .15s ease;
+}
+
+.figma-nav-links a:hover,
+.figma-nav-links a.active {
+  color: #d6d9dd;
+}
+
+.figma-nav-actions,
+.figma-guest-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 18px;
+}
+
+.figma-guest-nav {
+  gap: 10px;
+}
+
+.figma-icon-button {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.figma-icon-button svg {
+  width: 31px;
+  height: 31px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.figma-cart svg {
+  width: 43px;
+  height: 43px;
+  stroke-width: 1.8;
+}
+
+.figma-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 19px;
+  border: 1px solid #223042;
+  border-radius: 10px;
+  background: #111927;
+  color: #e9edf3;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.figma-btn:hover {
+  filter: brightness(1.08);
+}
+
+.figma-btn-with-icon {
+  gap: 6px;
+}
+
+.figma-btn-with-icon svg {
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
+}
+
+.figma-btn-dark {
+  background: #080f18;
+}
+
+.figma-btn-primary,
+.figma-btn-profile {
+  border-color: var(--figma-cyan);
+  background: var(--figma-cyan);
+  color: #041019;
+}
+
+.figma-btn-profile {
+  min-width: 94px;
+  font-family: Georgia, serif;
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.figma-main {
+  min-height: calc(100vh - 168px);
+  padding: 42px 0 88px;
+}
+
+.figma-hero {
+  padding: 4px 8px 0;
+}
+
+.figma-eyebrow {
+  color: #52cbee;
+  font-family: var(--figma-display);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .2px;
+  text-transform: uppercase;
+}
+
+.figma-hero h1,
+.categories-hero h1 {
+  margin: 12px 0 4px;
+  color: #f7fbff;
+  font-family: var(--figma-display);
+  font-size: clamp(58px, 7.4vw, 106px);
+  font-weight: 400;
+  line-height: .93;
+  letter-spacing: -3px;
+  text-shadow:
+    0 0 7px rgba(255,255,255,.56),
+    0 0 20px rgba(85,184,226,.18);
+}
+
+.figma-hero h1 span {
+  color: #4ec6ef;
+  text-shadow:
+    0 0 8px rgba(80,200,240,.8),
+    0 0 28px rgba(80,200,240,.48);
+}
+
+.figma-hero p,
+.categories-hero p {
+  margin: 12px 0 0;
+  color: #b3b7c0;
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+.home-empty-actions {
+  display: flex;
+  align-items: end;
+  gap: 22px;
+  margin-top: 160px;
+}
+
+.home-metrics {
+  display: flex;
+  gap: 24px;
+}
+
+.home-metrics > div {
+  display: grid;
+  gap: 1px;
+}
+
+.home-metrics strong {
+  color: #fff;
+  font-family: var(--figma-display);
+  font-size: 14px;
+  line-height: 1;
+}
+
+.home-metrics span {
+  color: var(--figma-cyan);
+  font-size: 7px;
+  font-weight: 700;
+}
+
+.home-hero-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.home-display-title {
+  margin: 14px 0 14px 8px;
+  color: #4ac2ed;
+  font-family: var(--figma-display-strong);
+  font-size: clamp(38px, 5vw, 64px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: .5px;
+  text-shadow: 0 0 13px rgba(68,193,237,.4);
+}
+
+.home-featured-section {
+  margin-top: 18px;
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.figma-live-card {
+  min-width: 0;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 13px;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+}
+
+.figma-live-card.selected {
+  border-color: rgba(80,200,240,.8);
+  box-shadow: 0 0 22px rgba(80,200,240,.12);
+}
+
+.figma-live-thumb {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid #17364a;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #06101c, #0c2740);
+}
+
+.figma-live-thumb > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.figma-live-placeholder {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  width: 100%;
+  height: 100%;
+  gap: 8px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(53,141,190,.22), transparent 35%),
+    linear-gradient(135deg, #06101c, #0d2135);
+}
+
+.figma-live-placeholder .figma-brand-mark {
+  width: 42px;
+  height: 42px;
+  font-size: 25px;
+}
+
+.figma-live-placeholder strong {
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.figma-live-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--figma-red);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.figma-live-badge i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.figma-live-viewers {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 6px 9px;
+  border-radius: 7px;
+  background: rgba(1,11,19,.92);
+  color: #4bc8ef;
+  font-size: 8px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.figma-live-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 51px;
+  height: 51px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(61,174,218,.92);
+  color: #062033;
+  font-size: 18px;
+  font-weight: 900;
+  box-shadow: 0 4px 18px rgba(0,0,0,.25);
+}
+
+.figma-live-play svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.figma-live-meta {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  padding: 10px 2px 4px;
+}
+
+.figma-live-avatar {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #42b8e4;
+  color: #041019;
+  font-weight: 900;
+  object-fit: cover;
+}
+
+.figma-live-copy {
+  display: grid;
+  min-width: 0;
+}
+
+.figma-live-copy strong {
+  overflow: hidden;
+  color: #fff;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.figma-live-copy span {
+  overflow: hidden;
+  margin-top: 2px;
+  color: #e0e3e7;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.figma-live-copy small {
+  overflow: hidden;
+  margin-top: 4px;
+  color: #43c8ef;
+  font-size: 8px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.figma-state {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  color: #697587;
+  text-align: center;
+}
+
+.figma-state strong {
+  color: #fff;
+  font-size: 14px;
+}
+
+.figma-state span {
+  margin-top: 6px;
+  font-size: 10px;
+}
+
+.figma-state-bordered {
+  min-height: 142px;
+  border: 1px dashed #29384a;
+  border-radius: 8px;
+}
+
+.figma-state-plain {
+  min-height: 210px;
+}
+
+.home-categories-section {
+  margin-top: 38px;
+}
+
+.figma-section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 0 8px 16px;
+}
+
+.figma-section-heading h2 {
+  margin: 3px 0 0;
+  font-family: var(--figma-display);
+  font-size: 28px;
+  letter-spacing: .2px;
+}
+
+.figma-link {
+  color: #50c8f0;
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.home-category-strip {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.home-category-card {
+  display: grid;
+  min-height: 94px;
+  padding: 17px 14px;
+  border: 1px solid #172536;
+  border-radius: 10px;
+  background: #0d1724;
+  color: #fff;
+}
+
+.home-category-icon {
+  color: #9b69ec;
+}
+
+.home-category-icon svg,
+.figma-category-icon svg,
+.home-filter svg,
+.category-page-icon svg {
+  width: 1.25em;
+  height: 1.25em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.home-category-card strong {
+  align-self: end;
+  margin-top: 10px;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.home-category-card small {
+  margin-top: 3px;
+  color: #607187;
+  font-size: 7px;
+}
+
+.home-live-section {
+  margin-top: 60px;
+}
+
+.home-live-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  gap: 28px;
+  align-items: center;
+  margin: 24px 0 24px;
+}
+
+.home-live-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.home-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 42px;
+  padding: 0 13px;
+  border: 1px solid #19283a;
+  border-radius: 9px;
+  background: #111a29;
+  color: #b5bac3;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.home-filter.active {
+  border-color: var(--figma-cyan);
+  background: var(--figma-cyan);
+  color: #06131d;
+  font-weight: 800;
+}
+
+.figma-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid #243349;
+  border-radius: 8px;
+  background: #0b1420;
+  color: #58d0f3;
+}
+
+.figma-search input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #d7dee7;
+}
+
+.figma-search > svg {
+  width: 19px;
+  height: 19px;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+.figma-search input::placeholder {
+  color: #838c9a;
+}
+
+.home-live-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.home-watch-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.figma-btn-watch {
+  min-width: 150px;
+}
+
+.figma-btn.is-disabled {
+  pointer-events: none;
+  opacity: .45;
+}
+
+.categories-hero {
+  padding: 6px 42px 26px;
+}
+
+.categories-hero h1 {
+  margin-top: 12px;
+  font-size: clamp(62px, 7vw, 96px);
+}
+
+.categories-hero p {
+  margin-top: 12px;
+}
+
+.figma-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  padding: 0 22px 38px;
+}
+
+.figma-category-card {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr) 38px;
+  align-items: center;
+  min-height: 172px;
+  padding: 26px 34px;
+  border: 1px solid #152235;
+  border-radius: 16px;
+  background:
+    linear-gradient(105deg, rgba(15,28,42,.98), rgba(12,23,35,.98));
+  color: #fff;
+  box-shadow: 0 12px 30px rgba(0,0,0,.12);
+}
+
+.figma-category-icon {
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 14px;
+  background: #172638;
+  color: #a47af0;
+  font-size: 30px;
+}
+
+.figma-category-copy {
+  display: grid;
+  gap: 8px;
+}
+
+.figma-category-copy strong {
+  font-size: 22px;
+}
+
+.figma-category-copy small {
+  color: #b3b8c1;
+  font-size: 14px;
+}
+
+.figma-category-arrow {
+  justify-self: end;
+  color: #4ec8ef;
+  font-size: 32px;
+  font-weight: 300;
+}
+
+.figma-footer {
+  border-top: 1px solid rgba(149, 160, 171, .48);
+  background: #030912;
+}
+
+.figma-footer-inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  min-height: 90px;
+  gap: 28px;
+}
+
+.figma-footer-brand .figma-brand-mark {
+  width: 40px;
+  height: 40px;
+  border-radius: 9px;
+  font-size: 25px;
+}
+
+.figma-footer-brand .figma-brand-name {
+  font-size: 28px;
+}
+
+.figma-footer-copy {
+  color: #d3d6da;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.figma-footer-links {
+  display: flex;
+  justify-content: flex-end;
+  gap: 22px;
+}
+
+.figma-footer-links a {
+  color: #d6d9de;
+  font-family: Georgia, serif;
+  font-size: 13px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.figma-auth-gate {
+  position: fixed;
+  inset: 84px 0 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(2, 7, 14, .38);
+  backdrop-filter: blur(4px);
+}
+
+.figma-auth-gate-card {
+  width: min(390px, calc(100vw - 32px));
+  min-height: 190px;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  padding: 28px;
+  border: 1px solid #263445;
+  background: #03070d;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .58);
+  text-align: center;
+}
+
+.figma-auth-gate-card p {
+  margin: 0 0 28px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+}
+
+.figma-auth-gate-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.figma-auth-gate-actions span {
+  color: #d8dde4;
+  font: 13px/1 Georgia, serif;
+}
+
+.figma-auth-blocked main {
+  filter: blur(2.5px);
+  pointer-events: none;
+  user-select: none;
+}
+
+.guest-only {
+  display: none;
+}
+
+.is-guest .guest-only {
+  display: grid;
+}
+
+@media (max-width: 980px) {
+  .figma-nav {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .figma-nav-links {
+    gap: 14px;
+  }
+
+  .featured-grid,
+  .home-live-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-category-strip {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .figma-categories-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .figma-container {
+    width: min(100% - 22px, 1200px);
+  }
+
+  .figma-nav {
+    min-height: 66px;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 5px;
+  }
+
+  .figma-brand {
+    gap: 5px;
+  }
+
+  .figma-brand-mark {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    font-size: 19px;
+  }
+
+  .figma-brand-name {
+    font-size: 18px;
+  }
+
+  .figma-nav-links {
+    display: flex;
+    min-width: 0;
+    gap: 5px;
+  }
+
+  .figma-nav-links a {
+    font-size: 8px;
+    white-space: nowrap;
+  }
+
+  .figma-nav-actions,
+  .figma-guest-nav {
+    gap: 3px;
+  }
+
+  .figma-icon-button {
+    width: 28px;
+    height: 28px;
+  }
+
+  .figma-icon-button svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .figma-cart svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .figma-btn {
+    min-height: 28px;
+    padding: 0 7px;
+    border-radius: 7px;
+    font-size: 8px;
+  }
+
+  .figma-btn-profile {
+    min-width: 54px;
+    font-size: 11px;
+  }
+
+  .figma-main {
+    padding: 30px 0 56px;
+  }
+
+  .figma-hero {
+    padding-inline: 2px;
+  }
+
+  .figma-hero h1 {
+    font-size: clamp(43px, 14vw, 66px);
+    letter-spacing: -2px;
+  }
+
+  .figma-hero p,
+  .categories-hero p {
+    font-size: 13px;
+  }
+
+  .home-empty-actions {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-top: 90px;
+  }
+
+  .home-display-title {
+    margin-left: 0;
+    font-size: 42px;
+  }
+
+  .featured-grid,
+  .home-live-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-category-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-live-controls {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .home-filter {
+    min-height: 36px;
+    padding-inline: 9px;
+    font-size: 9px;
+  }
+
+  .categories-hero {
+    padding: 4px 4px 22px;
+  }
+
+  .categories-hero h1 {
+    font-size: 56px;
+  }
+
+  .figma-categories-grid {
+    padding: 0 0 24px;
+    gap: 12px;
+  }
+
+  .figma-category-card {
+    grid-template-columns: 54px minmax(0, 1fr) 28px;
+    min-height: 116px;
+    padding: 18px 18px;
+    border-radius: 12px;
+  }
+
+  .figma-category-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 11px;
+    font-size: 23px;
+  }
+
+  .figma-category-copy strong {
+    font-size: 17px;
+  }
+
+  .figma-category-copy small {
+    font-size: 11px;
+  }
+
+  .figma-category-arrow {
+    font-size: 25px;
+  }
+
+  .figma-footer-inner {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding: 18px 0;
+    text-align: center;
+  }
+
+  .figma-footer-links {
+    justify-content: center;
+  }
+
+  .figma-auth-gate {
+    inset-block-start: 66px;
+  }
+}
+
+
+/* ==================================================
+   FIGMA — AO VIVO
+   ================================================== */
+.live-list-hero {
+  padding: 10px 18px 22px;
+}
+
+.live-list-hero h1 {
+  margin: 8px 0 0;
+  font-family: var(--figma-display);
+  font-size: clamp(56px, 6.4vw, 90px);
+  font-weight: 500;
+  line-height: .98;
+  letter-spacing: -2px;
+  text-shadow: 0 0 12px rgba(255,255,255,.22);
+}
+
+.live-list-hero p {
+  margin: 10px 0 0;
+  color: #aeb4be;
+  font-size: 17px;
+}
+
+.live-browser {
+  padding: 18px 18px 28px;
+}
+
+.live-browser-toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 230px;
+  align-items: center;
+  gap: 26px;
+  margin-bottom: 24px;
+}
+
+.live-browser-search {
+  width: 100%;
+}
+
+.live-browser-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  min-height: 250px;
+}
+
+.live-browser-empty {
+  min-height: 340px;
+}
+
+.live-browser-watch {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+
+/* ==================================================
+   FIGMA — LIVE
+   ================================================== */
+.figma-watch-main {
+  padding-top: 26px;
+}
+
+.figma-watch-page .player-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 310px;
+  gap: 16px;
+  align-items: start;
+}
+
+.figma-watch-page .player {
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border: 1px solid #17364a;
+  border-radius: 12px;
+  background: #000;
+  box-shadow: 0 18px 42px rgba(0,0,0,.22);
+}
+
+.figma-watch-page .player iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.figma-watch-page .player-layout > div > .panel.card {
+  margin-top: 14px !important;
+  padding: 17px 18px;
+  border: 1px solid #17283a;
+  border-radius: 12px;
+  background: #0b1420;
+  box-shadow: none;
+}
+
+.figma-watch-page .live-info-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 22px;
+  align-items: start;
+}
+
+.figma-watch-page .status-live,
+.figma-watch-page .status-offline {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 8px;
+  padding: 5px 8px;
+  border-radius: 5px;
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.figma-watch-page .status-live {
+  background: #e11d48;
+  color: #fff;
+}
+
+.figma-watch-page .status-offline {
+  background: #374151;
+  color: #fff;
+}
+
+.figma-watch-page .platform-badge {
+  margin-left: 8px;
+}
+
+.figma-watch-page .live-info-row h1 {
+  font-family: var(--figma-display);
+  font-size: 30px;
+  letter-spacing: -.5px;
+}
+
+.figma-watch-page .viewer-panel {
+  min-width: 138px;
+  padding: 12px 14px;
+  border: 1px solid #263244;
+  border-radius: 10px;
+  background: #101824;
+}
+
+.figma-watch-page .viewer-panel strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 18px;
+}
+
+.figma-watch-page .support-box {
+  margin-top: 14px;
+  padding: 16px;
+  border: 1px solid #1b2d3f;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0b1421, #0b1725);
+  box-shadow: none;
+}
+
+.figma-watch-page .chat {
+  overflow: hidden;
+  min-height: 520px;
+  border: 1px solid #263244;
+  border-radius: 12px;
+  background: #0a111d;
+  box-shadow: none;
+}
+
+.figma-watch-page .chat-header {
+  padding: 14px;
+  border-bottom: 1px solid #1c2939;
+}
+
+.figma-watch-page .chat-header .eyebrow {
+  color: #e11d48;
+  font-size: 8px;
+}
+
+.figma-watch-page .chat-notice {
+  background: #0d1626;
+}
+
+@media (max-width: 980px) {
+  .live-browser-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .figma-watch-page .player-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .figma-watch-page .chat {
+    min-height: 390px;
+  }
+}
+
+@media (max-width: 760px) {
+  .live-list-hero,
+  .live-browser {
+    padding-inline: 2px;
+  }
+
+  .live-list-hero h1 {
+    font-size: 52px;
+  }
+
+  .live-list-hero p {
+    font-size: 13px;
+  }
+
+  .live-browser-toolbar {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .live-browser-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .figma-watch-page .live-info-row {
+    grid-template-columns: 1fr;
+  }
+
+  .figma-watch-page .viewer-panel {
+    min-width: 0;
+  }
+}
+
+
+/* ==================================================
+   FIGMA — AUTENTICAÇÃO
+   ================================================== */
+.figma-auth-page {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(51,44,98,.12), transparent 36%),
+    #060b12;
+}
+
+.figma-auth-shell {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 28px 16px;
+}
+
+.figma-auth-card,
+.figma-reset-card {
+  width: min(390px, 100%);
+  padding: 26px 30px 24px;
+  border: 1px solid #252d39;
+  border-radius: 12px;
+  background: #0d1118;
+  box-shadow: 0 24px 80px rgba(0,0,0,.38);
+}
+
+.figma-register-card {
+  width: min(400px, 100%);
+}
+
+.figma-auth-brand {
+  justify-content: center;
+  margin: 0 auto 22px;
+}
+
+.figma-auth-brand .figma-brand-mark,
+.figma-reset-brand .figma-brand-mark {
+  width: 39px;
+  height: 39px;
+  border-radius: 9px;
+  font-size: 25px;
+}
+
+.figma-auth-brand .figma-brand-name,
+.figma-reset-brand .figma-brand-name {
+  font-size: 28px;
+}
+
+.figma-auth-card h1,
+.figma-reset-card h1 {
+  margin: 0 0 22px;
+  color: #fff;
+  font-family: var(--figma-display);
+  font-size: 30px;
+  text-align: center;
+}
+
+.figma-auth-card .form-group,
+.figma-reset-card .form-group {
+  gap: 6px;
+  margin: 12px 0;
+}
+
+.figma-auth-card label,
+.figma-reset-card label {
+  color: #c7cbd2;
+  font-size: 11px;
+}
+
+.figma-auth-card .input,
+.figma-reset-card .input {
+  min-height: 39px;
+  padding: 9px 11px;
+  border: 1px solid #2a313d;
+  border-radius: 7px;
+  background: #0a0f16;
+  color: #fff;
+}
+
+.figma-auth-primary,
+.figma-auth-google {
+  width: 100%;
+  min-height: 40px;
+  margin-top: 12px;
+  border: 0;
+  border-radius: 7px;
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.figma-auth-primary {
+  background: linear-gradient(90deg, #7e47d9, #9560e8);
+}
+
+.figma-auth-google {
+  border: 1px solid #2a313d;
+  background: #111722;
+  color: #e8ebef;
+}
+
+.figma-auth-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+
+.figma-auth-google svg {
+  width: 17px;
+  height: 17px;
+}
+
+.figma-auth-card > .muted {
+  margin: 12px 0 0;
+  color: #777f8b;
+  font-size: 8px;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.figma-auth-link {
+  display: block;
+  margin-top: 12px;
+  color: #a4a8b0;
+  font-size: 10px;
+  text-align: center;
+}
+
+.figma-auth-switch {
+  margin: 16px 0 0;
+  color: #9197a0;
+  font-size: 10px;
+  text-align: center;
+}
+
+.figma-auth-switch a {
+  color: #fff;
+  font-weight: 700;
+}
+
+.figma-reset-shell {
+  min-height: 100vh;
+}
+
+.figma-reset-card {
+  width: min(360px, 100%);
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  text-align: center;
+}
+
+.figma-reset-brand {
+  justify-content: center;
+  margin: 0 auto 28px;
+}
+
+.figma-reset-card p {
+  color: #9da4ae;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* ==================================================
+   FIGMA — PERFIL / CONFIG LIVE
+   ================================================== */
+.figma-profile-main,
+.figma-config-main {
+  padding-top: 28px;
+}
+
+.figma-profile-page #profile-root,
+.figma-config-page #config-root {
+  width: min(1040px, calc(100% - 42px));
+}
+
+.figma-profile-page #profile-root > .card,
+.figma-config-page #config-root > .card {
+  border: 1px solid #1e2c3b;
+  border-radius: 14px;
+  background: #0c1520;
+  box-shadow: 0 18px 48px rgba(0,0,0,.18);
+}
+
+.figma-profile-page #profile-root > .card:first-child {
+  padding: 24px 28px;
+}
+
+.figma-profile-page #profile-root h1 {
+  font-family: var(--figma-display);
+  font-size: 34px;
+  font-weight: 600;
+}
+
+.figma-profile-page .profile-grid {
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: 28px;
+}
+
+.figma-profile-page .profile-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 12px;
+  background: #d7d9dc;
+}
+
+.figma-profile-page .info-row {
+  min-height: 42px;
+  padding: 9px 0;
+  border-bottom-color: #1b2938;
+}
+
+.figma-profile-page .info-row strong {
+  color: #f3f5f7;
+  font-size: 12px;
+}
+
+.figma-profile-page .info-row > span {
+  color: #b8c0ca;
+  font-size: 11px;
+  text-align: right;
+}
+
+.profile-email-verification {
+  margin: 12px 0 6px;
+  padding: 13px;
+  border: 1px solid #5e4b20;
+  border-radius: 9px;
+  background: #181308;
+  color: #c9b98c;
+  font-size: 10px;
+}
+
+.profile-email-verification p {
+  margin: 0 0 9px;
+}
+
+.profile-email-verification > div {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.profile-email-verification > span {
+  display: block;
+  margin-top: 8px;
+}
+
+.figma-profile-page #profile-root > .card:nth-of-type(2) {
+  padding: 20px 24px;
+}
+
+.figma-profile-page #profile-root > .card:nth-of-type(3) {
+  padding: 20px 24px;
+  background: #120d12;
+}
+
+.figma-config-page #config-root > .card {
+  padding: 24px 26px;
+}
+
+.figma-config-page #config-root h1 {
+  margin: 5px 0 22px;
+  font-family: var(--figma-display);
+  font-size: 38px;
+}
+
+.figma-config-page .grid.grid-2 {
+  gap: 26px;
+}
+
+.figma-config-page .input,
+.figma-profile-page .input {
+  border-color: #263244;
+  background: #080f18;
+}
+
+.figma-config-page .stream-status-card,
+.figma-config-page .stream-alert-settings {
+  border-color: #1d2c3c;
+  background: #0d1724;
+  box-shadow: none;
+}
+
+/* ==================================================
+   FIGMA — SAIR
+   ================================================== */
+.figma-signout-shell {
+  display: grid;
+  place-items: center;
+  min-height: calc(100vh - 84px);
+  padding: 30px 16px;
+}
+
+.figma-signout-card {
+  width: min(360px, 100%);
+  text-align: center;
+}
+
+.figma-signout-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: #25bd72;
+  color: #04150d;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.figma-signout-card h1 {
+  margin: 0;
+  font-family: var(--figma-display);
+  font-size: 30px;
+}
+
+.figma-signout-card p {
+  margin: 9px 0 20px;
+  color: #929daa;
+  font-size: 12px;
+}
+
+.figma-signout-actions {
+  display: flex;
+  justify-content: center;
+  gap: 9px;
+}
+
+.figma-danger-btn {
+  border-color: #a42334;
+  background: #bd2739;
+  color: #fff;
+}
+
+/* ==================================================
+   FIGMA — SOBRE
+   ================================================== */
+.about-hero {
+  padding: 10px 28px 52px;
+}
+
+.about-hero h1 {
+  max-width: 940px;
+  margin: 10px 0 10px;
+  font-family: var(--figma-display);
+  font-size: clamp(56px, 6.3vw, 88px);
+  font-weight: 500;
+  line-height: .97;
+  letter-spacing: -2px;
+}
+
+.about-hero h1 span {
+  color: var(--figma-cyan);
+  text-shadow: 0 0 20px rgba(80,200,240,.34);
+}
+
+.about-hero p {
+  max-width: 760px;
+  margin: 0;
+  color: #aab2bd;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.about-split {
+  display: grid;
+  grid-template-columns: .85fr 1.15fr;
+  gap: 70px;
+  padding: 42px 28px;
+  border-top: 1px solid #182637;
+}
+
+.about-split h2,
+.about-values h2 {
+  margin: 6px 0 0;
+  font-family: var(--figma-display);
+  font-size: 34px;
+}
+
+.about-copy {
+  color: #aab2bd;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.about-copy p:first-child {
+  margin-top: 0;
+}
+
+.about-values {
+  padding: 42px 28px 52px;
+  border-top: 1px solid #182637;
+}
+
+.about-value-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.about-value-grid article {
+  min-height: 190px;
+  padding: 22px 20px;
+  border: 1px solid #172536;
+  border-radius: 12px;
+  background: #0d1724;
+}
+
+.about-value-grid article > span {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  color: #55c9ef;
+  font-size: 28px;
+}
+
+.about-value-grid article > span svg {
+  width: 27px;
+  height: 27px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.about-value-grid h3 {
+  margin: 16px 0 7px;
+  font-size: 15px;
+}
+
+.about-value-grid p {
+  margin: 0;
+  color: #8e9bab;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+@media (max-width: 760px) {
+  .figma-profile-page #profile-root,
+  .figma-config-page #config-root {
+    width: min(100% - 22px, 1040px);
+  }
+
+  .figma-profile-page .profile-grid,
+  .figma-config-page .grid.grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .figma-profile-page .info-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .figma-profile-page .info-row > span {
+    text-align: left;
+  }
+
+  .about-hero,
+  .about-split,
+  .about-values {
+    padding-inline: 3px;
+  }
+
+  .about-hero h1 {
+    font-size: 48px;
+  }
+
+  .about-split {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .about-value-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ==================================================
+   FIGMA — CATEGORIA / SUBCATEGORIA
+   ================================================== */
+.category-page-hero {
+  padding: 12px 24px 22px;
+}
+
+.category-page-heading {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.category-page-icon {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  flex: 0 0 auto;
+  border: 1px solid #1c3043;
+  border-radius: 17px;
+  background: #132235;
+  font-size: 34px;
+}
+
+.category-page-hero h1 {
+  margin: 4px 0 0;
+  font-family: var(--figma-display);
+  font-size: clamp(48px, 5.8vw, 80px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+.category-page-hero p {
+  margin: 8px 0 0;
+  color: #9da7b4;
+  font-size: 14px;
+}
+
+.category-subnav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 10px 24px 24px;
+}
+
+.category-live-area {
+  padding: 0 24px 24px;
+}
+
+.category-live-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  min-height: 320px;
+}
+
+.category-empty {
+  min-height: 320px;
+}
+
+.category-watch-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+
+/* ==================================================
+   FIGMA — LOJA
+   ================================================== */
+.shop-hero {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 18px 28px 42px;
+}
+
+.shop-hero > div {
+  max-width: 720px;
+}
+
+.shop-hero h1,
+.payment-hero h1 {
+  margin: 5px 0 8px;
+  font-family: var(--figma-display);
+  font-size: clamp(58px, 6.2vw, 88px);
+  font-weight: 500;
+  line-height: .98;
+  letter-spacing: -2px;
+}
+
+.shop-hero p,
+.payment-hero p {
+  margin: 0;
+  color: #95a3b4;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.shop-balance-card,
+.payment-balance {
+  min-width: 210px;
+  height: fit-content;
+  padding: 18px 20px;
+  border: 1px solid #18384a;
+  border-radius: 13px;
+  background: #0b1724;
+}
+
+.shop-balance-card span,
+.payment-balance span {
+  display: block;
+  color: #7d8b9d;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .9px;
+}
+
+.shop-balance-card strong,
+.payment-balance strong {
+  display: block;
+  margin-top: 8px;
+  color: #58c8ed;
+  font-size: 25px;
+}
+
+.shop-packages-section {
+  padding: 0 28px 34px;
+}
+
+.shop-section-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.shop-section-head h2 {
+  margin: 4px 0 0;
+  font-family: var(--figma-display);
+  font-size: 33px;
+}
+
+.shop-bonus-tag {
+  padding: 7px 11px;
+  border: 1px solid #1d617c;
+  border-radius: 999px;
+  background: #0a2230;
+  color: #6dd5f4;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.shop-package-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.shop-package-card {
+  position: relative;
+  display: flex;
+  min-height: 285px;
+  padding: 22px 18px 18px;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid #253449;
+  border-radius: 14px;
+  background: linear-gradient(150deg, #101824, #0b1420);
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+  transition: .16s ease;
+}
+
+.shop-package-card:hover,
+.shop-package-card.selected {
+  border-color: #58c8ed;
+  transform: translateY(-2px);
+  box-shadow: 0 0 26px rgba(88,200,237,.09);
+}
+
+.shop-popular {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 5px 7px;
+  border-radius: 999px;
+  background: #58c8ed;
+  color: #041019;
+  font-size: 7px;
+  font-weight: 900;
+}
+
+.shop-package-label {
+  color: #a8b3c1;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.shop-package-coins {
+  margin-top: 24px;
+  color: #58c8ed;
+  font-size: 28px;
+}
+
+.shop-package-price {
+  margin-top: 4px;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.shop-package-card p {
+  margin: 18px 0;
+  color: #7f8da0;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.shop-package-action {
+  margin-top: auto;
+  padding-top: 13px;
+  color: #9edff4;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.shop-selection-note {
+  margin-top: 16px;
+  color: #8f9cad;
+  font-size: 11px;
+  text-align: center;
+}
+
+.shop-continue-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.shop-prototype-note {
+  max-width: 650px;
+  margin: 15px auto 0;
+  color: #667487;
+  font-size: 9px;
+  line-height: 1.55;
+  text-align: center;
+}
+
+/* ==================================================
+   FIGMA — PAGAMENTO
+   ================================================== */
+.payment-hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 18px 28px 36px;
+}
+
+.payment-hero > div {
+  max-width: 690px;
+}
+
+.payment-balance {
+  min-width: 190px;
+  padding: 15px 18px;
+}
+
+.payment-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: 22px;
+  padding: 0 28px 38px;
+}
+
+.payment-methods {
+  padding: 20px;
+  border: 1px solid #1f2f42;
+  border-radius: 14px;
+  background: #0b1420;
+}
+
+.payment-methods h2 {
+  margin: 5px 0 16px;
+  font-family: var(--figma-display);
+  font-size: 29px;
+}
+
+.payment-method-card {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-top: 10px;
+  padding: 14px;
+  border: 1px solid #263244;
+  border-radius: 10px;
+  background: #101824;
+  cursor: pointer;
+}
+
+.payment-method-card:has(input:checked) {
+  border-color: #58c8ed;
+  background: #102333;
+}
+
+.payment-method-card input {
+  accent-color: #58c8ed;
+}
+
+.payment-method-icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  border-radius: 8px;
+  background: #142638;
+  color: #58c8ed;
+  font-size: 18px;
+}
+
+.payment-method-card strong {
+  display: block;
+  font-size: 12px;
+}
+
+.payment-method-card small {
+  display: block;
+  margin-top: 3px;
+  color: #7f8da0;
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+.payment-security,
+.payment-admin-note {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 17px;
+  padding: 14px;
+  border: 1px solid #263244;
+  border-radius: 10px;
+  background: #101824;
+  color: #7f8da0;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.payment-admin-note {
+  margin-top: 12px;
+  border-color: #1e617b;
+  background: #0c202a;
+  color: #9cdff5;
+}
+
+.payment-summary {
+  height: fit-content;
+  padding: 20px;
+  border: 1px solid #263244;
+  border-radius: 14px;
+  background: #101824;
+}
+
+.payment-summary-label {
+  color: #8b99aa;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.payment-summary-coin {
+  margin-top: 16px;
+  color: #58c8ed;
+  font-size: 31px;
+  font-weight: 900;
+}
+
+.payment-summary-coins {
+  display: block;
+  margin-top: 2px;
+  font-size: 32px;
+}
+
+.payment-summary-name {
+  color: #58c8ed;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.payment-summary-pack {
+  display: block;
+  margin-top: 5px;
+  color: #7f8da0;
+  font-size: 9px;
+}
+
+.payment-divider {
+  height: 1px;
+  margin: 17px 0;
+  background: #263244;
+}
+
+.payment-summary-row,
+.payment-summary-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 8px;
+  color: #8b99aa;
+  font-size: 10px;
+}
+
+.payment-summary-row strong {
+  color: #cdd5df;
+}
+
+.payment-summary-total {
+  margin-top: 15px;
+  color: #fff;
+  font-size: 13px;
+}
+
+.payment-confirm {
+  width: 100%;
+  margin-top: 17px;
+  padding: 11px 12px;
+  border: 0;
+  border-radius: 9px;
+  background: #58c8ed;
+  color: #06111a;
+  font-size: 9px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.payment-confirm:disabled {
+  opacity: .55;
+  cursor: wait;
+}
+
+.payment-summary-note {
+  margin-top: 9px;
+  color: #66758a;
+  font-size: 8px;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.payment-empty {
+  display: flex;
+  min-height: 430px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.payment-empty-icon {
+  color: #58c8ed;
+  font-size: 42px;
+  font-weight: 900;
+}
+
+.payment-empty h1 {
+  margin: 12px 0 0;
+  font-family: var(--figma-display);
+  font-size: 28px;
+}
+
+.payment-empty p {
+  max-width: 480px;
+  margin: 7px 0 16px;
+  color: #8b99aa;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+@media (max-width: 980px) {
+  .category-live-grid,
+  .shop-package-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .payment-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .category-page-hero,
+  .category-subnav,
+  .category-live-area,
+  .shop-hero,
+  .shop-packages-section,
+  .payment-hero,
+  .payment-layout {
+    padding-inline: 2px;
+  }
+
+  .category-page-heading {
+    align-items: flex-start;
+  }
+
+  .category-page-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 12px;
+    font-size: 26px;
+  }
+
+  .category-page-hero h1 {
+    font-size: 44px;
+  }
+
+  .category-live-grid,
+  .shop-package-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shop-hero,
+  .payment-hero {
+    flex-direction: column;
+  }
+
+  .shop-balance-card,
+  .payment-balance {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .shop-section-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

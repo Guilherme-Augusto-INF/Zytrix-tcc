@@ -3,86 +3,34 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Zytrix — Categorias de livestream</title>
-
-
-
-
-
-<link rel="stylesheet" href="assets/css/styles.css">
-  <link rel="stylesheet" href="assets/css/features.css">
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@graph":[
-      {
-        "@type":"CollectionPage",
-        "@id":"https://zytrix-lives.vercel.app/categorias.html#page",
-        "url":"https://zytrix-lives.vercel.app/categorias.html",
-        "name":"Categorias de livestream da Zytrix",
-        "description":"Lista pública das categorias e subcategorias usadas para organizar transmissões na Zytrix.",
-        "inLanguage":"pt-BR",
-        "isPartOf":{"@id":"https://zytrix-lives.vercel.app/#website"}
-      },
-      {
-        "@type":"BreadcrumbList",
-        "itemListElement":[
-          {"@type":"ListItem","position":1,"name":"Início","item":"https://zytrix-lives.vercel.app/"},
-          {"@type":"ListItem","position":2,"name":"Categorias","item":"https://zytrix-lives.vercel.app/categorias.html"}
-        ]
-      }
-    ]
-  }
-  </script>
-  <meta name="description" content="Explore categorias de livestream na Zytrix, incluindo games, música, tecnologia, esportes e muito mais.">
+  <title>Zytrix — Categorias</title>
+  <meta name="description" content="Encontre transmissões ao vivo na Zytrix de acordo com as categorias que você gosta.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <link rel="canonical" href="https://zytrix-lives.vercel.app/categorias.html">
-  <meta property="og:locale" content="pt_BR">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Zytrix">
-  <meta property="og:title" content="Zytrix — Categorias de livestream">
-  <meta property="og:description" content="Explore categorias de livestream na Zytrix, incluindo games, música, tecnologia, esportes e muito mais.">
-  <meta property="og:url" content="https://zytrix-lives.vercel.app/categorias.html">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Zytrix — Categorias de livestream">
-  <meta name="twitter:description" content="Explore categorias de livestream na Zytrix, incluindo games, música, tecnologia, esportes e muito mais.">
-<link rel="stylesheet" href="/assets/css/policies.css">
+  <link rel="canonical" href="https://zytrix-tcc.vercel.app/categorias.html">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/figma.css">
 </head>
-<body>
+<body class="figma-page figma-categories-page">
   <div data-header></div>
-  <main class="main">
-    <div class="container">
-      <nav aria-label="Breadcrumb" class="muted" style="margin-bottom:18px"><a href="index.html">Início</a> / Categorias</nav>
-      <div class="eyebrow">Navegue e explore</div>
-      <h1 style="font-size:52px;margin:8px 0">Categorias de livestream</h1>
-      <p class="muted">A Zytrix usa categorias e subcategorias para organizar as transmissões e facilitar a descoberta de conteúdo.</p>
 
-      <div class="grid grid-2 section" id="categories-grid"></div>
-
-      <section class="section" aria-labelledby="lista-categorias">
-        <div class="eyebrow">Lista pública</div>
-        <h2 id="lista-categorias">Categorias e subcategorias disponíveis</h2>
-        <div class="grid grid-2">
-          <article class="card panel"><h3>Gaming</h3><p class="muted">Ação / Aventura, RPG, Esportes e Simulação.</p></article>
-          <article class="card panel"><h3>Música</h3><p class="muted">Rock, Sertanejo, Eletrônica e Funk.</p></article>
-          <article class="card panel"><h3>Just Chatting</h3><p class="muted">Bate-Papo, Perguntas e Respostas, Histórias e Desafios.</p></article>
-          <article class="card panel"><h3>Criatividade</h3><p class="muted">Desenho, Design, Fotografia e Edição.</p></article>
-          <article class="card panel"><h3>Esportes</h3><p class="muted">Futebol, Basquete, Automobilismo e Lutas.</p></article>
-          <article class="card panel"><h3>Tecnologia</h3><p class="muted">Programação, Hardware, Inteligência Artificial e Ciência e Tech.</p></article>
-          <article class="card panel"><h3>Podcasts</h3><p class="muted">Conversas, Entrevistas, Notícias e Entretenimento.</p></article>
-          <article class="card panel"><h3>IRL</h3><p class="muted">Viagens, Eventos, Vida Cotidiana e Exploração.</p></article>
-        </div>
+  <main class="figma-main">
+    <div class="figma-container">
+      <section class="categories-hero" aria-labelledby="categories-title">
+        <div class="figma-eyebrow">• CATEGORIAS E FILTROS</div>
+        <h1 id="categories-title">Categorias</h1>
+        <p>Encontre transmissões ao vivo de acordo com o que gosta.</p>
       </section>
 
-      <section class="section grid grid-2">
-        <div class="card panel"><h2>Como as categorias são usadas?</h2><p class="muted">O streamer seleciona uma categoria ao configurar a live. As páginas de descoberta usam essa informação para agrupar transmissões.</p><a href="recursos.html#categorias">Entender o funcionamento →</a></div>
-        <div class="card panel"><h2>Tem dúvidas?</h2><p class="muted">O FAQ explica como assistir, transmitir e configurar uma live.</p><a href="faq.html">Abrir FAQ →</a></div>
+      <section aria-label="Categorias disponíveis">
+        <div id="categories-grid" class="figma-categories-grid"></div>
       </section>
     </div>
   </main>
-  <div data-footer><footer class="site-footer container"><nav class="governance-links" aria-label="Políticas e segurança"><a href="/termos">Termos</a><a href="/privacidade">Privacidade</a><a href="/diretrizes-da-comunidade">Diretrizes da Comunidade</a><a href="/denuncias-e-moderacao">Denúncias e Moderação</a><a href="/conteudo-proibido">Conteúdo Proibido</a><a href="/politicas">Central de políticas</a></nav></footer></div>
+
+  <div data-footer></div>
+
   <script type="module" src="assets/js/categorias.js"></script>
-  <script type="module" src="assets/js/global-features.js"></script>
 </body>
 </html>

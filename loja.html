@@ -1,57 +1,54 @@
 <!doctype html>
 <html lang="pt-BR">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width,initial-scale=1" name="viewport"/>
-  <title>
-   Zytrix — Zy Coins
-  </title>
-  <link href="assets/css/styles.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="assets/css/features.css">
-  <meta name="description" content="Conheça os pacotes demonstrativos de Zy Coins para apoiar criadores na Zytrix.">
-  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <link rel="canonical" href="https://zytrix-lives.vercel.app/loja.html">
-  <meta property="og:locale" content="pt_BR">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Zytrix">
-  <meta property="og:title" content="Zytrix — Zy Coins">
-  <meta property="og:description" content="Conheça os pacotes demonstrativos de Zy Coins para apoiar criadores na Zytrix.">
-  <meta property="og:url" content="https://zytrix-lives.vercel.app/loja.html">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Zytrix — Zy Coins">
-  <meta name="twitter:description" content="Conheça os pacotes demonstrativos de Zy Coins para apoiar criadores na Zytrix.">
-<link rel="stylesheet" href="/assets/css/policies.css">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Zytrix — Zy Coins</title>
+  <meta name="description" content="Escolha pacotes de Zy Coins para apoiar criadores na Zytrix.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/figma.css">
 </head>
- <body>
-  <div data-header="">
-  </div>
-  <main class="main">
-   <div class="container">
-    <div class="eyebrow">
-     Zy Coins
+<body class="figma-page figma-shop-page">
+  <div data-header></div>
+
+  <main class="figma-main">
+    <div class="figma-container">
+      <section class="shop-hero">
+        <div>
+          <div class="figma-eyebrow">ZYTRIX • APOIE QUEM CRIA</div>
+          <h1>Zy Coins</h1>
+          <p>Use Zy Coins para apoiar streamers durante as lives. Quanto mais você apoia, mais força dá para os criadores continuarem produzindo conteúdo.</p>
+        </div>
+
+        <aside class="shop-balance-card">
+          <span>SEU SALDO</span>
+          <strong id="shop-balance">Carregando...</strong>
+        </aside>
+      </section>
+
+      <section class="shop-packages-section">
+        <div class="shop-section-head">
+          <div>
+            <div class="figma-eyebrow">PACOTES</div>
+            <h2>Escolha suas Zy Coins</h2>
+          </div>
+          <span class="shop-bonus-tag">CARTEIRA PROTEGIDA</span>
+        </div>
+
+        <div id="packages" class="shop-package-grid"></div>
+        <div id="shop-selection" class="shop-selection-note">Selecione um pacote para continuar</div>
+
+        <div class="shop-continue-row">
+          <a id="shop-continue" class="figma-btn figma-btn-primary is-disabled" href="pagamento.html" aria-disabled="true">Continuar para pagamento</a>
+        </div>
+
+        <p class="shop-prototype-note">A página de pagamento desta versão é demonstrativa. Nenhum dado real de cartão é coletado.</p>
+      </section>
     </div>
-    <h1>
-     Loja de Zy Coins
-    </h1>
-    <p class="muted">
-     Use Zy Coins para apoiar streamers durante as transmissões.
-    </p>
-    <div class="card panel" style="margin:18px 0">
-     <strong>
-      Seu saldo:
-     </strong>
-     <span class="coin-pill" id="shop-balance">
-      Carregando...
-     </span>
-    </div>
-    <div class="grid grid-4" id="packages">
-    </div>
-   </div>
   </main>
-  <div data-footer=""><footer class="site-footer container"><nav class="governance-links" aria-label="Políticas e segurança"><a href="/termos">Termos</a><a href="/privacidade">Privacidade</a><a href="/diretrizes-da-comunidade">Diretrizes da Comunidade</a><a href="/denuncias-e-moderacao">Denúncias e Moderação</a><a href="/conteudo-proibido">Conteúdo Proibido</a><a href="/politicas">Central de políticas</a></nav></footer></div>
-  <script src="assets/js/loja.js" type="module">
-  </script>
-   <script type="module" src="assets/js/global-features.js"></script>
+
+  <div data-footer></div>
+  <script src="assets/js/loja.js" type="module"></script>
 </body>
 </html>

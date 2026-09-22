@@ -1,59 +1,49 @@
 <!doctype html>
 <html lang="pt-BR">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width,initial-scale=1" name="viewport"/>
-  <title>
-   Zytrix — Categoria
-  </title>
-  <link href="assets/css/styles.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="assets/css/features.css">
-  <link rel="stylesheet" href="assets/css/platform.css">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Zytrix — Categoria</title>
   <meta name="description" content="Explore transmissões ao vivo por categoria e subcategoria na Zytrix.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <link rel="canonical" href="https://zytrix-lives.vercel.app/categoria.html">
-  <meta property="og:locale" content="pt_BR">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Zytrix">
-  <meta property="og:title" content="Zytrix — Categoria">
-  <meta property="og:description" content="Explore transmissões ao vivo por categoria e subcategoria na Zytrix.">
-  <meta property="og:url" content="https://zytrix-lives.vercel.app/categoria.html">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Zytrix — Categoria">
-  <meta name="twitter:description" content="Explore transmissões ao vivo por categoria e subcategoria na Zytrix.">
-<link rel="stylesheet" href="/assets/css/policies.css">
+  <link rel="canonical" href="https://zytrix-tcc.vercel.app/categoria.html">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/figma.css">
 </head>
- <body>
-  <div data-header="">
-  </div>
-  <main class="main">
-   <div class="container">
-    <div style="display:flex;align-items:center;gap:12px">
-     <span class="category-icon" id="category-icon">
-     </span>
-     <div>
-      <div class="eyebrow">
-       Categoria
-      </div>
-      <h1 id="category-title" style="margin:4px 0">
-      </h1>
-     </div>
+<body class="figma-page figma-category-page">
+  <div data-header></div>
+
+  <main class="figma-main">
+    <div class="figma-container">
+      <section class="category-page-hero">
+        <div class="category-page-heading">
+          <span class="category-page-icon" id="category-icon"></span>
+          <div>
+            <div class="figma-eyebrow">• CATEGORIA</div>
+            <h1 id="category-title"></h1>
+            <p>Encontre transmissões ao vivo nesta categoria.</p>
+          </div>
+        </div>
+      </section>
+
+      <nav class="category-subnav" id="subcategories" aria-label="Subcategorias"></nav>
+
+      <section class="category-live-area" aria-label="Lives da categoria">
+        <div id="category-lives" class="category-live-grid">
+          <div class="figma-state">Procurando lives...</div>
+        </div>
+
+        <div class="category-watch-row">
+          <a id="category-watch-button" class="figma-btn figma-btn-watch is-disabled" href="live.html" aria-disabled="true">Assistir Live</a>
+        </div>
+      </section>
     </div>
-    <div class="filters section" id="subcategories">
-    </div>
-    <div class="grid grid-4 section" id="category-lives">
-     <div class="state">
-      Carregando...
-     </div>
-    </div>
-   </div>
   </main>
-  <div data-footer=""><footer class="site-footer container"><nav class="governance-links" aria-label="Políticas e segurança"><a href="/termos">Termos</a><a href="/privacidade">Privacidade</a><a href="/diretrizes-da-comunidade">Diretrizes da Comunidade</a><a href="/denuncias-e-moderacao">Denúncias e Moderação</a><a href="/conteudo-proibido">Conteúdo Proibido</a><a href="/politicas">Central de políticas</a></nav></footer></div>
-  <script src="assets/js/categoria.js" type="module">
-  </script>
-   <script type="module" src="assets/js/category-follow.js"></script>
-   <script type="module" src="assets/js/global-features.js"></script>
+
+  <div data-footer></div>
+
+  <script src="assets/js/categoria.js" type="module"></script>
   <script type="module" src="assets/js/seo-runtime.js"></script>
 </body>
 </html>

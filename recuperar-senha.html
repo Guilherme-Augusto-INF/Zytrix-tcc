@@ -1,68 +1,37 @@
 <!doctype html>
 <html lang="pt-BR">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width,initial-scale=1" name="viewport"/>
-  <title>
-   Zytrix — Recuperar senha
-  </title>
-  <link href="assets/css/styles.css" rel="stylesheet"/>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Zytrix — Recuperar senha</title>
+  <meta name="description" content="Recupere o acesso à sua conta Zytrix.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/styles.css">
   <link rel="stylesheet" href="assets/css/features.css">
-  <meta name="description" content="Recupere o acesso à sua conta Zytrix com segurança.">
-  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <link rel="canonical" href="https://zytrix-lives.vercel.app/recuperar-senha.html">
-  <meta property="og:locale" content="pt_BR">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Zytrix">
-  <meta property="og:title" content="Zytrix — Recuperar senha">
-  <meta property="og:description" content="Recupere o acesso à sua conta Zytrix com segurança.">
-  <meta property="og:url" content="https://zytrix-lives.vercel.app/recuperar-senha.html">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Zytrix — Recuperar senha">
-  <meta name="twitter:description" content="Recupere o acesso à sua conta Zytrix com segurança.">
-<link rel="stylesheet" href="/assets/css/policies.css">
+  <link rel="stylesheet" href="assets/css/figma.css">
 </head>
- <body>
-  <div data-header="">
-  </div>
-  <main class="auth-shell">
-   <form class="card auth-card" data-auth-form="" data-mode="reset">
-    <div class="brand" style="justify-content:center">
-     <span class="brand-mark">
-      Z
-     </span>
-     <span>
-      Zytrix
-     </span>
-    </div>
-    <h2 style="text-align:center">
-     Recuperar senha
-    </h2>
-    <p class="muted">
-     Digite o e-mail cadastrado para receber o link de redefinição.
-    </p>
-    <div class="form-group">
-     <label>
-      E-mail
-     </label>
-     <input class="input" name="email" required="" type="email"/>
-    </div>
-    <button class="btn btn-purple" style="width:100%">
-     Enviar link
-    </button>
-    <p style="text-align:center">
-     <a class="muted" href="login.html">
-      Voltar para entrar
-     </a>
-    </p>
-    <div class="hidden" id="message">
-    </div>
-   </form>
+<body class="figma-page figma-auth-page">
+  <main class="figma-auth-shell figma-reset-shell">
+    <form class="figma-reset-card" data-auth-form data-mode="reset">
+      <a class="figma-brand figma-reset-brand" href="index.html" aria-label="Zytrix - Início">
+        <span class="figma-brand-mark">Z</span>
+        <span class="figma-brand-name">Zytrix</span>
+      </a>
+
+      <h1>Recuperar senha</h1>
+      <p>Digite o e-mail cadastrado para receber o link de redefinição.</p>
+
+      <div class="form-group">
+        <label for="reset-email">E-mail</label>
+        <input class="input" id="reset-email" name="email" required type="email" autocomplete="email">
+      </div>
+
+      <button class="figma-auth-primary" type="submit">Enviar link</button>
+      <a class="figma-auth-link" href="login.html">Voltar para entrar</a>
+      <div class="hidden" id="message"></div>
+    </form>
   </main>
-  <div data-footer=""><footer class="site-footer container"><nav class="governance-links" aria-label="Políticas e segurança"><a href="/termos">Termos</a><a href="/privacidade">Privacidade</a><a href="/diretrizes-da-comunidade">Diretrizes da Comunidade</a><a href="/denuncias-e-moderacao">Denúncias e Moderação</a><a href="/conteudo-proibido">Conteúdo Proibido</a><a href="/politicas">Central de políticas</a></nav></footer></div>
-  <script src="assets/js/auth-pages.js" type="module">
-  </script>
-   <script type="module" src="assets/js/global-features.js"></script>
+
+  <script src="assets/js/auth-pages.js" type="module"></script>
 </body>
 </html>

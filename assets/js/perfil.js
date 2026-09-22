@@ -1,4 +1,4 @@
-import { auth, db, googleProvider, onAuthStateChanged, EmailAuthProvider, reauthenticateWithPopup, reauthenticateWithCredential, deleteUser, doc, getDoc, getDocs, deleteDoc, onSnapshot, updateDoc, query, collection, collectionGroup, where, limit, serverTimestamp, writeBatch } from './firebase.js';
+import { auth, db, googleProvider, onAuthStateChanged, EmailAuthProvider, reauthenticateWithPopup, reauthenticateWithCredential, sendEmailVerification, deleteUser, doc, getDoc, getDocs, deleteDoc, onSnapshot, updateDoc, query, collection, collectionGroup, where, limit, serverTimestamp, writeBatch } from './firebase.js';
 import { header, footer, escapeHtml, escapeAttr } from './ui.js';
 import { parseStreamingSource, streamingPlatformLabel } from './streaming.js';
 header();
@@ -11,6 +11,24 @@ let wallet = null;
 let channel = null;
 let stream = null;
 let walletUnsubscribe = null;
+let verificationCooldownUntil = 0;
+
+function timestampMs(value) {
+    return value?.toMillis?.() || value?.toDate?.()?.getTime?.() || 0;
+}
+
+function usernameCooldownRemaining() {
+    const updatedAt = timestampMs(profile?.usernameUpdatedAt);
+    if (!updatedAt)
+        return 0;
+    return Math.max(0, updatedAt + 7 * 24 * 60 * 60 * 1000 - Date.now());
+}
+
+function cooldownText(milliseconds) {
+    const days = Math.floor(milliseconds / 86400000);
+    const hours = Math.ceil((milliseconds % 86400000) / 3600000);
+    return `${days} dia(s) e ${hours} hora(s)`;
+}
 function dateText(timestamp) {
     try {
         return timestamp?.toDate?.().toLocaleDateString('pt-BR', {
@@ -113,6 +131,16 @@ function render() {
             </span>
           </div>
 
+          ${user.emailVerified ? '' : `
+          <div class="profile-email-verification">
+            <p>Verifique seu e-mail para liberar chat, Zy Coins e recursos de criador.</p>
+            <div>
+              <button id="resend-verification" class="btn" type="button">Reenviar verificação</button>
+              <button id="check-verification" class="btn btn-primary" type="button">Já verifiquei</button>
+            </div>
+            <span id="verification-message" role="status"></span>
+          </div>`}
+
           <div class="info-row">
             <strong>Zy Coins</strong>
             <span class="coin-pill">
@@ -136,6 +164,7 @@ function render() {
             maxlength="30"
             value="${escapeAttr(profile.username || '')}"
           >
+          ${usernameCooldownRemaining() ? `<small class="muted">Nova alteração de nome em ${cooldownText(usernameCooldownRemaining())}.</small>` : ''}
         </div>
 
         <div class="form-group">
@@ -243,6 +272,8 @@ function render() {
     };
     document.querySelector('#save-profile').onclick = saveProfile;
     document.querySelector('#delete-account').onclick = deleteAccount;
+    document.querySelector('#resend-verification')?.addEventListener('click', resendVerification);
+    document.querySelector('#check-verification')?.addEventListener('click', checkVerification);
     if (!channel) {
         document.querySelector('#be-streamer').onclick = createStreamer;
     }
@@ -252,6 +283,18 @@ async function saveProfile() {
     const name = document.querySelector('#edit-name').value.trim();
     const photoURL = document.querySelector('#edit-photo').value.trim();
     const bio = document.querySelector('#edit-bio').value.trim();
+    if (name.length < 2 || name.length > 30) {
+        message.innerHTML = '<div class="message err">O nome precisa ter entre 2 e 30 caracteres.</div>';
+        return;
+    }
+    if (bio.length > 500) {
+        message.innerHTML = '<div class="message err">A bio pode ter no máximo 500 caracteres.</div>';
+        return;
+    }
+    if (name !== profile.username && usernameCooldownRemaining() > 0) {
+        message.innerHTML = `<div class="message err">Você ainda precisa esperar ${cooldownText(usernameCooldownRemaining())} para alterar o nome.</div>`;
+        return;
+    }
     try {
         const data = {
             photoURL,
@@ -268,6 +311,55 @@ async function saveProfile() {
     catch (error) {
         console.error(error);
         message.innerHTML = '<div class="message err">Não foi possível atualizar o perfil.</div>';
+    }
+}
+
+async function resendVerification() {
+    const message = document.querySelector('#verification-message');
+    const button = document.querySelector('#resend-verification');
+    if (!message || !button || Date.now() < verificationCooldownUntil)
+        return;
+    try {
+        button.disabled = true;
+        await sendEmailVerification(user);
+        verificationCooldownUntil = Date.now() + 60000;
+        message.textContent = 'E-mail enviado. Confira sua caixa de entrada.';
+        let remaining = 60;
+        button.textContent = `Reenviar em ${remaining}s`;
+        const timer = setInterval(() => {
+            remaining -= 1;
+            if (remaining <= 0 || !document.body.contains(button)) {
+                clearInterval(timer);
+                if (document.body.contains(button)) {
+                    button.disabled = false;
+                    button.textContent = 'Reenviar verificação';
+                }
+                return;
+            }
+            button.textContent = `Reenviar em ${remaining}s`;
+        }, 1000);
+    }
+    catch (error) {
+        console.warn('Falha ao reenviar verificação.', error?.code || error?.name || 'unknown');
+        message.textContent = error?.code === 'auth/too-many-requests'
+            ? 'Muitas tentativas. Aguarde antes de reenviar.'
+            : 'Não foi possível enviar o e-mail.';
+        button.disabled = false;
+    }
+}
+
+async function checkVerification() {
+    const message = document.querySelector('#verification-message');
+    if (!message)
+        return;
+    message.textContent = 'Verificando...';
+    await user.reload();
+    if (user.emailVerified) {
+        message.textContent = 'E-mail verificado com sucesso.';
+        render();
+    }
+    else {
+        message.textContent = 'Seu e-mail ainda não foi verificado.';
     }
 }
 async function createStreamer() {

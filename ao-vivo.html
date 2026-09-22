@@ -4,73 +4,47 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Zytrix — Ao Vivo</title>
-
-
-
-
-
-<link rel="stylesheet" href="assets/css/styles.css">
-  <link rel="stylesheet" href="assets/css/features.css">
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@graph":[
-      {
-        "@type":"CollectionPage",
-        "url":"https://zytrix-lives.vercel.app/ao-vivo.html",
-        "name":"Transmissões ao vivo na Zytrix",
-        "description":"Página pública que reúne transmissões marcadas como ao vivo dentro da plataforma Zytrix.",
-        "inLanguage":"pt-BR"
-      },
-      {
-        "@type":"BreadcrumbList",
-        "itemListElement":[
-          {"@type":"ListItem","position":1,"name":"Início","item":"https://zytrix-lives.vercel.app/"},
-          {"@type":"ListItem","position":2,"name":"Ao Vivo","item":"https://zytrix-lives.vercel.app/ao-vivo.html"}
-        ]
-      }
-    ]
-  }
-  </script>
-  <meta name="description" content="Descubra transmissões ao vivo na Zytrix e acompanhe seus criadores favoritos.">
+  <meta name="description" content="Descubra quem está transmitindo neste momento na Zytrix.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <link rel="canonical" href="https://zytrix-lives.vercel.app/ao-vivo.html">
-  <meta property="og:locale" content="pt_BR">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Zytrix">
-  <meta property="og:title" content="Zytrix — Ao Vivo">
-  <meta property="og:description" content="Descubra transmissões ao vivo na Zytrix e acompanhe seus criadores favoritos.">
-  <meta property="og:url" content="https://zytrix-lives.vercel.app/ao-vivo.html">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Zytrix — Ao Vivo">
-  <meta name="twitter:description" content="Descubra transmissões ao vivo na Zytrix e acompanhe seus criadores favoritos.">
-<link rel="stylesheet" href="/assets/css/policies.css">
+  <link rel="canonical" href="https://zytrix-tcc.vercel.app/ao-vivo.html">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/figma.css">
 </head>
-<body>
+<body class="figma-page figma-live-list-page">
   <div data-header></div>
-  <main class="main">
-    <div class="container">
-      <nav aria-label="Breadcrumb" class="muted" style="margin-bottom:18px"><a href="index.html">Início</a> / Ao Vivo</nav>
-      <div class="eyebrow">Transmissões</div>
-      <h1>Ao vivo na Zytrix</h1>
-      <p class="muted">Esta página lista transmissões que estão marcadas como ao vivo na Zytrix. O vídeo é exibido por meio de players incorporados da Twitch ou Kick, de acordo com a origem vinculada pelo streamer.</p>
 
-      <div class="toolbar">
-        <div class="filters" id="filters"></div>
-        <label class="search">🔍 <input id="search" placeholder="Pesquisar lives..."></label>
-      </div>
-      <div class="grid grid-4" id="lives-grid"><div class="state">Carregando...</div></div>
+  <main class="figma-main">
+    <div class="figma-container">
+      <section class="live-list-hero" aria-labelledby="live-list-title">
+        <div class="figma-eyebrow">• TRANSMISSÕES</div>
+        <h1 id="live-list-title">Ao vivo agora</h1>
+        <p>Descubra quem está transmitindo neste momento.</p>
+      </section>
 
-      <section class="section" aria-labelledby="como-assistir">
-        <h2 id="como-assistir">Como assistir uma live?</h2>
-        <p>Escolha uma transmissão na lista para abrir a página da live. Nela, a Zytrix carrega o player da plataforma vinculada e, para usuários autenticados, disponibiliza recursos como chat e acompanhamento do streamer.</p>
-        <p><a href="faq.html">Ver mais respostas sobre assistir e transmitir →</a></p>
+      <section class="live-browser" aria-label="Transmissões ao vivo">
+        <div class="live-browser-toolbar">
+          <div id="filters" class="home-live-filters"></div>
+
+          <label class="figma-search live-browser-search" aria-label="Pesquisar lives">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l5 5"></path></svg>
+            <input id="search" type="search" placeholder="Pesquisar lives...">
+          </label>
+        </div>
+
+        <div id="lives-grid" class="live-browser-grid">
+          <div class="figma-state">Carregando transmissões...</div>
+        </div>
+
+        <div class="live-browser-watch">
+          <a id="live-browser-watch-button" class="figma-btn figma-btn-watch is-disabled" href="live.html" aria-disabled="true">Assistir Live</a>
+        </div>
       </section>
     </div>
   </main>
-  <div data-footer><footer class="site-footer container"><nav class="governance-links" aria-label="Políticas e segurança"><a href="/termos">Termos</a><a href="/privacidade">Privacidade</a><a href="/diretrizes-da-comunidade">Diretrizes da Comunidade</a><a href="/denuncias-e-moderacao">Denúncias e Moderação</a><a href="/conteudo-proibido">Conteúdo Proibido</a><a href="/politicas">Central de políticas</a></nav></footer></div>
+
+  <div data-footer></div>
   <script type="module" src="assets/js/ao-vivo.js"></script>
-  <script type="module" src="assets/js/global-features.js"></script>
 </body>
 </html>
