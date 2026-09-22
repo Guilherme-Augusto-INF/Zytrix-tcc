@@ -1,4 +1,3 @@
-import {prepareAcceptance,requireAcceptanceBeforeSignup,recordAcceptance} from './policy-acceptance.js';
 import { auth, db, googleProvider, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, doc, setDoc, serverTimestamp, getDoc } from './firebase.js';
 import { header, footer } from './ui.js';
 import { strongPassword, genericAuthMessage, localRedirect } from './security.js';
@@ -8,7 +7,6 @@ const form = document.querySelector('form[data-auth-form]');
 const msg = document.querySelector('#message');
 const mode = form?.dataset.mode;
 const requestedRedirect = new URLSearchParams(location.search).get('redirect');
-await prepareAcceptance(form);
 function show(text, type = 'err') { if (!msg)
     return; msg.textContent = text; msg.className = `message ${type}`; msg.classList.remove('hidden'); }
 function googleAuthMessage(error) {
@@ -28,7 +26,6 @@ function googleAuthMessage(error) {
     return 'Não foi possível entrar com Google.';
 }
 async function ensureDocs(user, username = 'Usuário', provider = 'password') {
-    await recordAcceptance(user);
     const uref = doc(db, 'users', user.uid), pref = doc(db, 'profiles', user.uid);
     if (!(await getDoc(uref)).exists())
         await setDoc(uref, { uid: user.uid, zytrixId: `ZY-${user.uid.slice(0, 10).toUpperCase()}`, email: user.email || '', provider, createdAt: serverTimestamp(), lastLoginAt: serverTimestamp() });
@@ -46,7 +43,6 @@ form?.addEventListener('submit', async (e) => {
             location.href = localRedirect(requestedRedirect, 'index.html');
         }
         if (mode === 'register') {
-            requireAcceptanceBeforeSignup();
             const name = String(fd.get('username') || '').trim();
             const email = String(fd.get('email') || '').trim();
             const password = String(fd.get('password') || '');
@@ -78,7 +74,6 @@ googleButton?.addEventListener('click', async () => {
     googleButton.disabled = true;
     msg?.classList.add('hidden');
     try {
-        requireAcceptanceBeforeSignup();
         const cred = await signInWithPopup(auth, googleProvider);
         try {
             await ensureDocs(cred.user, cred.user.displayName || 'Usuário', 'google');

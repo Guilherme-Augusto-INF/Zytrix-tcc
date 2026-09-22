@@ -26,7 +26,7 @@ const grid = document.querySelector('#category-lives');
 const watchButton = document.querySelector('#category-watch-button');
 
 title.textContent = sub ? `${category} — ${sub}` : category;
-icon.textContent = icons[category] || '◈';
+    icon.innerHTML = icons[category] || '';
 
 const subs = categories[category] || [];
 subnav.innerHTML =

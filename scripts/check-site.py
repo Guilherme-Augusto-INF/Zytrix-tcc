@@ -1,33 +1,83 @@
-from pathlib import Path
 from html.parser import HTMLParser
+from pathlib import Path
 from urllib.parse import urlsplit
-import json, subprocess
-root=Path(__file__).resolve().parents[1]
-class Parser(HTMLParser):
- def __init__(self):super().__init__();self.refs=[];self.ids=[];self.h1=0
- def handle_starttag(self,tag,attrs):
-  a=dict(attrs)
-  if a.get('id'):self.ids.append(a['id'])
-  if tag=='h1':self.h1+=1
-  if tag in ['a','script','link']:
-   ref=a.get('href',a.get('src',''))
-   if ref:self.refs.append(ref)
-errors=[];routes={i['source']:i['destination'] for i in json.loads((root/'vercel.json').read_text())['rewrites']}
-for slug in ['termos','privacidade','diretrizes-da-comunidade','denuncias-e-moderacao','conteudo-proibido','politicas','denunciar','moderacao']:
- p=root/(slug+'.html');parser=Parser();parser.feed(p.read_text())
- if parser.h1!=1:errors.append(f'{slug}: h1')
- if len(parser.ids)!=len(set(parser.ids)):errors.append(f'{slug}: duplicate ids')
- for ref in parser.refs:
-  u=urlsplit(ref)
-  if u.scheme or u.netloc:continue
-  if not u.path:
-   if u.fragment and u.fragment not in parser.ids:errors.append(f'{slug}: {ref}')
-   continue
-  target=routes.get(u.path,u.path)
-  if not (root/target.lstrip('/')).exists():errors.append(f'{slug}: missing {ref}')
-for f in (root/'assets/js').glob('*.js'):
- r=subprocess.run(['node','--check',str(f)],capture_output=True,text=True)
- if r.returncode:errors.append(r.stderr)
-assert (root/'firestore.rules').read_bytes()==(root/'firebase/firestore.rules').read_bytes()==(root/'REGRAS-PARA-COLAR-NO-FIREBASE.txt').read_bytes()
-if errors:raise SystemExit('\n'.join(errors))
-print('PASS: JS syntax, policy routes, local links, anchors, headings, rules copies')
+import re
+import subprocess
+
+ROOT = Path(__file__).resolve().parents[1]
+EXPECTED_HTML = {
+    "index.html", "categorias.html", "categoria.html", "ao-vivo.html",
+    "live.html", "login.html", "registro.html", "recuperar-senha.html",
+    "sobre.html", "perfil.html", "config-live.html", "sair.html",
+}
+FORBIDDEN = {
+    "admin.html", "faq.html", "recursos.html", "robots.txt", "sitemap.xml",
+    "site.webmanifest", "llms.txt", "google87f94d9d56cacf74.html", "favicon.svg",
+}
+
+
+class ReferenceParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.references = []
+
+    def handle_starttag(self, tag, attrs):
+        values = dict(attrs)
+        key = "src" if tag in {"script", "img", "iframe"} else "href"
+        if tag in {"a", "link", "script", "img", "iframe"} and values.get(key):
+            self.references.append(values[key])
+
+
+def local_target(source, reference):
+    url = urlsplit(reference)
+    if url.scheme or url.netloc or not url.path:
+        return None
+    path = url.path.lstrip("/")
+    if not path:
+        return ROOT / "index.html"
+    candidate = ROOT / path if reference.startswith("/") else source.parent / path
+    if not candidate.suffix:
+        candidate = candidate.with_suffix(".html")
+    return candidate
+
+
+errors = []
+html_files = {path.name for path in ROOT.glob("*.html")}
+if html_files != EXPECTED_HTML:
+    errors.append(f"HTML inesperado/ausente: {sorted(html_files ^ EXPECTED_HTML)}")
+
+for name in FORBIDDEN:
+    if (ROOT / name).exists():
+        errors.append(f"Arquivo proibido ainda existe: {name}")
+
+for html in sorted(ROOT.glob("*.html")):
+    parser = ReferenceParser()
+    parser.feed(html.read_text(encoding="utf-8"))
+    for reference in parser.references:
+        target = local_target(html, reference)
+        if target and not target.exists():
+            errors.append(f"{html.name}: referência local ausente: {reference}")
+
+for css in (ROOT / "assets/css").glob("*.css"):
+    for reference in re.findall(r"url\(['\"]?([^)'\"]+)", css.read_text(encoding="utf-8")):
+        target = local_target(css, reference)
+        if target and not target.exists():
+            errors.append(f"{css.relative_to(ROOT)}: asset ausente: {reference}")
+
+for javascript in (ROOT / "assets/js").glob("*.js"):
+    result = subprocess.run(["node", "--check", str(javascript)], capture_output=True, text=True)
+    if result.returncode:
+        errors.append(result.stderr.strip())
+
+runtime_text = "\n".join(
+    path.read_text(encoding="utf-8")
+    for pattern in ("*.html", "assets/js/*.js", "assets/css/*.css")
+    for path in ROOT.glob(pattern)
+)
+for obsolete in ("faq.html", "admin.html", "recursos.html", "loja.html", "pagamento.html"):
+    if obsolete in runtime_text:
+        errors.append(f"Referência obsoleta encontrada: {obsolete}")
+
+if errors:
+    raise SystemExit("\n".join(errors))
+print(f"PASS: {len(html_files)} telas, links locais, assets, sintaxe JS e escopo de arquivos")

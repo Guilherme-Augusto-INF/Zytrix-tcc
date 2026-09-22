@@ -1,11 +1,9 @@
 import { auth, db, onAuthStateChanged, doc, getDoc, onSnapshot, collection, query, orderBy, limit, setDoc, deleteDoc, runTransaction, increment, serverTimestamp, Timestamp, ensureWallet } from './firebase.js';
 import { header, footer, escapeHtml, escapeAttr } from './ui.js';
-import { reportLink } from './report-link.js';
 import { getStreamingEmbed, streamingPlatformLabel } from './streaming.js';
 import { safeImageUrl } from './security.js';
 header('ao-vivo');
 footer();
-reportLink(document.querySelector('#live-root'), 'stream', new URLSearchParams(location.search).get('stream') || localStorage.getItem('zytrixSelectedStream') || '');
 const streamId = new URLSearchParams(location.search).get('stream') ||
     localStorage.getItem('zytrixSelectedStream') ||
     '';
@@ -332,11 +330,37 @@ function updateChatComposerState() {
     }
 }
 async function sendChatMessage() {
-    const feedback = document.querySelector('#chat-feedback');
+    const input = document.querySelector('#chat-input');
     if (!user) { setChatFeedback('Faça login para enviar mensagens.', true); return; }
     if (!user.emailVerified) { setChatFeedback('Verifique seu e-mail para conversar.', true); return; }
-    // O envio real é instalado por live-extras.js, que usa chatRate atômico.
-    if (feedback) feedback.textContent = 'Preparando envio seguro...';
+    if (!input || stream?.status !== 'live' || isBanActive(currentChatBan)) return;
+    const text = input.value.trim();
+    if (!text || text.length > 300) {
+        setChatFeedback('A mensagem deve ter entre 1 e 300 caracteres.', true);
+        return;
+    }
+    try {
+        const messageRef = doc(collection(db, 'streams', streamId, 'chat'));
+        const rateRef = doc(db, 'streams', streamId, 'chatRate', user.uid);
+        await runTransaction(db, async transaction => {
+            const rateSnapshot = await transaction.get(rateRef);
+            const lastAt = rateSnapshot.data()?.lastAt?.toMillis?.() || 0;
+            if (Date.now() - lastAt < 1000) throw new Error('slow-mode');
+            transaction.set(messageRef, { uid: user.uid, text, createdAt: serverTimestamp() });
+            transaction.set(rateRef, {
+                uid: user.uid,
+                lastAt: serverTimestamp(),
+                expiresAt: Timestamp.fromMillis(Date.now() + 2 * 60 * 60 * 1000)
+            }, { merge: true });
+        });
+        input.value = '';
+        const counter = document.querySelector('#chat-counter');
+        if (counter) counter.textContent = '0/300';
+        setChatFeedback('Mensagem enviada.', false);
+    }
+    catch (error) {
+        setChatFeedback(error?.message === 'slow-mode' ? 'Aguarde um instante antes de enviar outra mensagem.' : 'Não foi possível enviar a mensagem.', true);
+    }
 }
 
 function setChatFeedback(message, isError) {

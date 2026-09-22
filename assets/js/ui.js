@@ -40,6 +40,15 @@ const cartIcon = `
 
 export function header(active = '') {
   ensureFigmaStyles();
+  if (!document.documentElement.dataset.zytrixImageFallback) {
+    document.documentElement.dataset.zytrixImageFallback = 'true';
+    document.addEventListener('error', event => {
+      const image = event.target;
+      if (image instanceof HTMLImageElement && image.matches('.figma-live-thumb img')) {
+        image.hidden = true;
+      }
+    }, true);
+  }
   const element = document.querySelector('[data-header]');
   if (!element) return;
 
@@ -63,9 +72,9 @@ export function header(active = '') {
             ${interfaceIcons.search}
           </a>
 
-          <a id="store-nav" class="figma-icon-button figma-cart hidden" href="loja.html" title="Loja" aria-label="Abrir loja">
+          <span id="store-nav" class="figma-icon-button figma-cart hidden" role="img" title="Loja" aria-label="Loja">
             ${cartIcon}
-          </a>
+          </span>
 
           <div id="guest-nav" class="guest-nav figma-guest-nav">
             <a class="figma-btn figma-btn-dark" href="login.html">Entrar</a>
@@ -110,8 +119,8 @@ export function footer() {
 
         <nav class="figma-footer-links" aria-label="Links institucionais">
           <a href="sobre.html">Sobre</a>
-          <a href="/termos">Termos</a>
-          <a href="/privacidade">Privacidade</a>
+          <span>Termos</span>
+          <span>Privacidade</span>
         </nav>
       </div>
     </footer>
