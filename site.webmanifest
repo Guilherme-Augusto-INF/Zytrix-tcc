@@ -1,0 +1,19 @@
+{
+  "name": "Zytrix",
+  "short_name": "Zytrix",
+  "description": "Plataforma de livestream Zytrix para descobrir, assistir e acompanhar transmissões.",
+  "lang": "pt-BR",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0a111c",
+  "theme_color": "#0a111c",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,1 +1,80 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Zytrix — Entrar</title><link rel="stylesheet" href="style.css"></head><body><header class="header"><div class="container nav"><a class="logo" href="index.html"><span class="logo-icon">Z</span><span>Zytrix</span></a><nav class="nav-links"><a href="index.html">Início</a><a href="categorias.html">Categorias</a><a href="ao-vivo.html">Ao Vivo</a><a href="sobre.html">Sobre</a></nav><div class="nav-actions"><button class="search-btn" data-search-open>⌕</button><a class="cart-btn" href="loja.html">🛒</a><a class="profile-btn" href="perfil.html">Perfil</a></div></div></header><main><section class="auth-wrap"><form class="auth-card" data-demo-form="login"><div class="section-label">CONTA ZYTRIX</div><h1>Entrar</h1><p>Acesse sua conta para acompanhar criadores, conversar e usar Zy Coins.</p><div class="field"><label>E-mail</label><input type="email" required></div><div class="field"><label>Senha</label><input type="password" required></div><button class="btn btn-primary full">Entrar</button><div class="form-message"></div><p><a href="recuperar-senha.html" style="color:var(--blue)">Esqueci minha senha</a> • <a href="registro.html" style="color:var(--blue)">Criar conta</a></p></form></section></main><footer class="footer"><div class="container footer-content"><a class="logo" href="index.html"><span class="logo-icon">Z</span><span>Zytrix</span></a><p>© 2026 Zytrix. Todos os direitos reservados.</p><div class="footer-links"><a href="sobre.html">Sobre</a><a href="#">Termos</a><a href="#">Privacidade</a></div></div></footer><div class="search-modal" id="searchModal"><div class="search-box"><button class="close-search" data-search-close>×</button><span class="section-label">PESQUISA</span><h2>O que você quer assistir?</h2><div class="search-input"><span>⌕</span><input id="searchInput" placeholder="Criador, jogo, categoria..."></div><div id="searchResults" class="search-results"></div></div></div><script src="script.js"></script></body></html>
+<!doctype html>
+<html lang="pt-BR">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <title>
+   Zytrix — Entrar
+  </title>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/features.css">
+  <meta name="description" content="Entre na sua conta Zytrix para acompanhar lives, participar do chat e acessar seu perfil.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <link rel="canonical" href="https://zytrix-lives.vercel.app/login.html">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Zytrix">
+  <meta property="og:title" content="Zytrix — Entrar">
+  <meta property="og:description" content="Entre na sua conta Zytrix para acompanhar lives, participar do chat e acessar seu perfil.">
+  <meta property="og:url" content="https://zytrix-lives.vercel.app/login.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Zytrix — Entrar">
+  <meta name="twitter:description" content="Entre na sua conta Zytrix para acompanhar lives, participar do chat e acessar seu perfil.">
+<link rel="stylesheet" href="/assets/css/policies.css">
+</head>
+ <body>
+  <div data-header="">
+  </div>
+  <main class="auth-shell">
+   <form class="card auth-card" data-auth-form="" data-mode="login">
+    <div class="brand" style="justify-content:center">
+     <span class="brand-mark">
+      Z
+     </span>
+     <span>
+      Zytrix
+     </span>
+    </div>
+    <h1>
+     Entrar
+    </h1>
+    <div class="form-group">
+     <label>
+      E-mail
+     </label>
+     <input class="input" name="email" required="" type="email"/>
+    </div>
+    <div class="form-group">
+     <label>
+      Senha
+     </label>
+     <input class="input" name="password" required="" type="password"/>
+    </div>
+    <button class="btn btn-purple" style="width:100%">
+     Entrar
+    </button>
+    <div class="form-actions" style="justify-content:center">
+     <a class="muted" href="recuperar-senha.html">
+      Esqueci minha senha
+     </a>
+    </div>
+    <button class="btn" id="google-login" style="width:100%;margin-top:12px" type="button">
+     Entrar com Google
+    </button>
+    <p class="muted" style="text-align:center">
+     Não possui conta?
+     <a href="registro.html" style="color:#fff">
+      Registrar
+     </a>
+    </p>
+    <div class="hidden" id="message">
+    </div>
+   </form>
+  </main>
+  <div data-footer=""><footer class="site-footer container"><nav class="governance-links" aria-label="Políticas e segurança"><a href="/termos">Termos</a><a href="/privacidade">Privacidade</a><a href="/diretrizes-da-comunidade">Diretrizes da Comunidade</a><a href="/denuncias-e-moderacao">Denúncias e Moderação</a><a href="/conteudo-proibido">Conteúdo Proibido</a><a href="/politicas">Central de políticas</a></nav></footer></div>
+  <script src="assets/js/auth-pages.js" type="module">
+  </script>
+   <script type="module" src="assets/js/global-features.js"></script>
+</body>
+</html>

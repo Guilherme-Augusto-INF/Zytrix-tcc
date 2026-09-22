@@ -1,1 +1,76 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Zytrix — Ao Vivo</title><link rel="stylesheet" href="style.css"></head><body><header class="header"><div class="container nav"><a class="logo" href="index.html"><span class="logo-icon">Z</span><span>Zytrix</span></a><nav class="nav-links"><a href="index.html">Início</a><a href="categorias.html">Categorias</a><a class="active" href="ao-vivo.html">Ao Vivo</a><a href="sobre.html">Sobre</a></nav><div class="nav-actions"><button class="search-btn" data-search-open>⌕</button><a class="cart-btn" href="loja.html">🛒</a><a class="profile-btn" href="perfil.html">Perfil</a></div></div></header><main><section class="page-hero"><div class="container"><div class="section-label">TRANSMISSÕES</div><h1>Ao vivo agora</h1><p>Descubra quem está transmitindo neste momento.</p></div></section><section class="page"><div class="container"><div class="filter-row"><button class="filter active" data-filter="todos">Todos</button><button class="filter" data-filter="gaming">🎮 Gaming</button><button class="filter" data-filter="musica">🎵 Música</button><button class="filter" data-filter="chat">🎙️ Chat</button><button class="filter" data-filter="tecnologia">💻 Tecnologia</button><div class="live-search"><span>⌕</span><input id="liveSearch" placeholder="Pesquisar lives..."></div></div><div class="featured-grid"><article class="stream-card" data-category="gaming" data-search="ranked rexplay gaming"><div class="thumb thumb-streamart"><span class="live-tag">AO VIVO</span><span class="views">◉ 8.2K</span><span class="play">▶</span></div><div class="stream-info"><div class="avatar">R</div><div><h3>Ranked até o Top 1</h3><p>RexPlay</p><span>Gaming • FPS</span></div></div></article><article class="stream-card" data-category="musica" data-search="lua vibes musica"><div class="thumb thumb-concert"><span class="live-tag">AO VIVO</span><span class="views">◉ 5.7K</span><span class="play">▶</span></div><div class="stream-info"><div class="avatar purple">L</div><div><h3>Live Session</h3><p>Lua Vibes</p><span>Música • Chill</span></div></div></article><article class="stream-card" data-category="chat" data-search="mikezone chat"><div class="thumb thumb-concert"><span class="live-tag">AO VIVO</span><span class="views">◉ 4.3K</span><span class="play">▶</span></div><div class="stream-info"><div class="avatar">M</div><div><h3>Conversando com vocês</h3><p>MikeZone</p><span>Just Chatting</span></div></div></article><article class="stream-card" data-category="tecnologia" data-search="skycode tecnologia"><div class="thumb thumb-streamart"><span class="live-tag">AO VIVO</span><span class="views">◉ 3.1K</span><span class="play">▶</span></div><div class="stream-info"><div class="avatar">S</div><div><h3>Construindo do zero</h3><p>SkyCode</p><span>Tecnologia • Dev</span></div></div></article></div></div></section></main><footer class="footer"><div class="container footer-content"><a class="logo" href="index.html"><span class="logo-icon">Z</span><span>Zytrix</span></a><p>© 2026 Zytrix. Todos os direitos reservados.</p><div class="footer-links"><a href="sobre.html">Sobre</a><a href="#">Termos</a><a href="#">Privacidade</a></div></div></footer><div class="search-modal" id="searchModal"><div class="search-box"><button class="close-search" data-search-close>×</button><span class="section-label">PESQUISA</span><h2>O que você quer assistir?</h2><div class="search-input"><span>⌕</span><input id="searchInput" placeholder="Criador, jogo, categoria..."></div><div id="searchResults" class="search-results"></div></div></div><script src="script.js"></script></body></html>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Zytrix — Ao Vivo</title>
+
+
+
+
+
+<link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/features.css">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"CollectionPage",
+        "url":"https://zytrix-lives.vercel.app/ao-vivo.html",
+        "name":"Transmissões ao vivo na Zytrix",
+        "description":"Página pública que reúne transmissões marcadas como ao vivo dentro da plataforma Zytrix.",
+        "inLanguage":"pt-BR"
+      },
+      {
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Início","item":"https://zytrix-lives.vercel.app/"},
+          {"@type":"ListItem","position":2,"name":"Ao Vivo","item":"https://zytrix-lives.vercel.app/ao-vivo.html"}
+        ]
+      }
+    ]
+  }
+  </script>
+  <meta name="description" content="Descubra transmissões ao vivo na Zytrix e acompanhe seus criadores favoritos.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <link rel="canonical" href="https://zytrix-lives.vercel.app/ao-vivo.html">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Zytrix">
+  <meta property="og:title" content="Zytrix — Ao Vivo">
+  <meta property="og:description" content="Descubra transmissões ao vivo na Zytrix e acompanhe seus criadores favoritos.">
+  <meta property="og:url" content="https://zytrix-lives.vercel.app/ao-vivo.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Zytrix — Ao Vivo">
+  <meta name="twitter:description" content="Descubra transmissões ao vivo na Zytrix e acompanhe seus criadores favoritos.">
+<link rel="stylesheet" href="/assets/css/policies.css">
+</head>
+<body>
+  <div data-header></div>
+  <main class="main">
+    <div class="container">
+      <nav aria-label="Breadcrumb" class="muted" style="margin-bottom:18px"><a href="index.html">Início</a> / Ao Vivo</nav>
+      <div class="eyebrow">Transmissões</div>
+      <h1>Ao vivo na Zytrix</h1>
+      <p class="muted">Esta página lista transmissões que estão marcadas como ao vivo na Zytrix. O vídeo é exibido por meio de players incorporados da Twitch ou Kick, de acordo com a origem vinculada pelo streamer.</p>
+
+      <div class="toolbar">
+        <div class="filters" id="filters"></div>
+        <label class="search">🔍 <input id="search" placeholder="Pesquisar lives..."></label>
+      </div>
+      <div class="grid grid-4" id="lives-grid"><div class="state">Carregando...</div></div>
+
+      <section class="section" aria-labelledby="como-assistir">
+        <h2 id="como-assistir">Como assistir uma live?</h2>
+        <p>Escolha uma transmissão na lista para abrir a página da live. Nela, a Zytrix carrega o player da plataforma vinculada e, para usuários autenticados, disponibiliza recursos como chat e acompanhamento do streamer.</p>
+        <p><a href="faq.html">Ver mais respostas sobre assistir e transmitir →</a></p>
+      </section>
+    </div>
+  </main>
+  <div data-footer><footer class="site-footer container"><nav class="governance-links" aria-label="Políticas e segurança"><a href="/termos">Termos</a><a href="/privacidade">Privacidade</a><a href="/diretrizes-da-comunidade">Diretrizes da Comunidade</a><a href="/denuncias-e-moderacao">Denúncias e Moderação</a><a href="/conteudo-proibido">Conteúdo Proibido</a><a href="/politicas">Central de políticas</a></nav></footer></div>
+  <script type="module" src="assets/js/ao-vivo.js"></script>
+  <script type="module" src="assets/js/global-features.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+# Zytrix
+
+> Zytrix é uma plataforma web de livestream em português, também conhecida como Zytrix Web e Zytrix Live.
+
+## Site oficial
+
+- https://zytrix-lives.vercel.app/
+
+## Sobre a Zytrix
+
+A Zytrix organiza transmissões ao vivo e permite que visitantes descubram criadores e acompanhem conteúdo integrado de plataformas como Twitch e Kick. O projeto possui páginas públicas de descoberta, categorias, recursos, FAQ, informações sobre a plataforma, status e roadmap.
+
+## Páginas públicas principais
+
+- [Página inicial](https://zytrix-lives.vercel.app/): visão geral da Zytrix e destaques.
+- [Ao vivo](https://zytrix-lives.vercel.app/ao-vivo.html): transmissões ao vivo disponíveis na plataforma.
+- [Explorar](https://zytrix-lives.vercel.app/explorar.html): descoberta de conteúdo.
+- [Categorias](https://zytrix-lives.vercel.app/categorias.html): organização do conteúdo por categorias.
+- [Clips](https://zytrix-lives.vercel.app/clips.html): momentos marcados pela comunidade.
+- [Recursos](https://zytrix-lives.vercel.app/recursos.html): recursos e funcionalidades da plataforma.
+- [FAQ](https://zytrix-lives.vercel.app/faq.html): perguntas frequentes.
+- [Sobre](https://zytrix-lives.vercel.app/sobre.html): informações sobre o projeto e seu funcionamento.
+- [Status](https://zytrix-lives.vercel.app/status.html): estado dos principais serviços.
+- [Roadmap](https://zytrix-lives.vercel.app/roadmap.html): recursos concluídos, em validação e planejados.
+
+## Identidade
+
+- Nome principal: Zytrix
+- Nomes alternativos: Zytrix Web; Zytrix Live
+- URL oficial: https://zytrix-lives.vercel.app/
+- Repositório público: https://github.com/Guilherme-Augusto-INF/Zytrix
+- Idioma principal: pt-BR
+
+## Tecnologias e integrações
+
+A versão web utiliza HTML, CSS e JavaScript, com integrações do ecossistema Firebase e players de Twitch e Kick quando aplicável.
+
+## Observação para agentes
+
+Use as páginas públicas acima como fontes primárias para descrever a Zytrix. Não trate áreas de conta, administração, autenticação, moderação interna ou pagamentos como conteúdo público de referência.

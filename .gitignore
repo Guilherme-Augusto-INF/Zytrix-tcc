@@ -1,9 +1,5 @@
-.env
-.env.*
-!.env.example
 node_modules/
+.firebase/
 .vercel/
-*.pem
-*.key
-*service-account*.json
-firebase-adminsdk*.json
+*-debug.log
+.env*

@@ -1,8 +1,88 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Zytrix — Categorias</title><meta name="description" content="Zytrix — plataforma de livestream."><link rel="stylesheet" href="style.css"></head><body><header class="header"><div class="container nav">
-<a class="logo" href="index.html"><span class="logo-icon">Z</span><span>Zytrix</span></a>
-<nav class="nav-links"><a href="index.html">Início</a><a href="categorias.html">Categorias</a><a href="ao-vivo.html">Ao Vivo</a><a href="sobre.html">Sobre</a></nav>
-<div class="nav-actions"><button class="search-btn" data-search-open aria-label="Pesquisar">⌕</button><a class="cart-btn" href="loja.html" aria-label="Loja">🛒<span class="cart-count">0</span></a><a class="profile-btn" href="perfil.html">Perfil</a></div>
-<button class="menu-btn" type="button">☰</button></div></header>
-<main><section class="page-hero"><div class="container"><div class="section-label">EXPLORE</div><h1>Categorias</h1><p>Encontre transmissões por tema e descubra novos criadores.</p></div></section><section class="page"><div class="container"><div class="large-category-grid"><a class="large-category" href="ao-vivo.html?categoria=gaming"><div class="large-category-icon">🎮</div><div><h2>Gaming</h2><p>12.4K transmissões</p></div><span>→</span></a><a class="large-category" href="ao-vivo.html?categoria=musica"><div class="large-category-icon">🎵</div><div><h2>Música</h2><p>8.7K transmissões</p></div><span>→</span></a><a class="large-category" href="ao-vivo.html?categoria=chat"><div class="large-category-icon">🎙️</div><div><h2>Just Chatting</h2><p>6.2K transmissões</p></div><span>→</span></a><a class="large-category" href="ao-vivo.html?categoria=criatividade"><div class="large-category-icon">🎨</div><div><h2>Criatividade</h2><p>4.8K transmissões</p></div><span>→</span></a><a class="large-category" href="ao-vivo.html?categoria=esportes"><div class="large-category-icon">⚽</div><div><h2>Esportes</h2><p>3.5K transmissões</p></div><span>→</span></a><a class="large-category" href="ao-vivo.html?categoria=tecnologia"><div class="large-category-icon">💻</div><div><h2>Tecnologia</h2><p>2.9K transmissões</p></div><span>→</span></a><a class="large-category" href="ao-vivo.html?categoria=podcasts"><div class="large-category-icon">🎧</div><div><h2>Podcasts</h2><p>1.8K transmissões</p></div><span>→</span></a><a class="large-category" href="ao-vivo.html?categoria=arte"><div class="large-category-icon">🖌️</div><div><h2>Arte</h2><p>1.4K transmissões</p></div><span>→</span></a></div></div></section></main><footer class="footer"><div class="container footer-content"><a class="logo" href="index.html"><span class="logo-icon">Z</span><span>Zytrix</span></a><p>© 2026 Zytrix. Todos os direitos reservados.</p><div class="footer-links"><a href="sobre.html">Sobre</a><a href="#">Termos</a><a href="#">Privacidade</a></div></div></footer>
-<div class="search-modal" id="searchModal"><div class="search-box"><button class="close-search" data-search-close>×</button><span class="section-label">PESQUISA</span><h2>O que você quer assistir?</h2><div class="search-input"><span>⌕</span><input id="searchInput" placeholder="Criador, jogo, categoria..." autocomplete="off"></div><div id="searchResults" class="search-results"></div></div></div>
-<script src="script.js"></script></body></html>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Zytrix — Categorias de livestream</title>
+
+
+
+
+
+<link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/features.css">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"CollectionPage",
+        "@id":"https://zytrix-lives.vercel.app/categorias.html#page",
+        "url":"https://zytrix-lives.vercel.app/categorias.html",
+        "name":"Categorias de livestream da Zytrix",
+        "description":"Lista pública das categorias e subcategorias usadas para organizar transmissões na Zytrix.",
+        "inLanguage":"pt-BR",
+        "isPartOf":{"@id":"https://zytrix-lives.vercel.app/#website"}
+      },
+      {
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Início","item":"https://zytrix-lives.vercel.app/"},
+          {"@type":"ListItem","position":2,"name":"Categorias","item":"https://zytrix-lives.vercel.app/categorias.html"}
+        ]
+      }
+    ]
+  }
+  </script>
+  <meta name="description" content="Explore categorias de livestream na Zytrix, incluindo games, música, tecnologia, esportes e muito mais.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <link rel="canonical" href="https://zytrix-lives.vercel.app/categorias.html">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Zytrix">
+  <meta property="og:title" content="Zytrix — Categorias de livestream">
+  <meta property="og:description" content="Explore categorias de livestream na Zytrix, incluindo games, música, tecnologia, esportes e muito mais.">
+  <meta property="og:url" content="https://zytrix-lives.vercel.app/categorias.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Zytrix — Categorias de livestream">
+  <meta name="twitter:description" content="Explore categorias de livestream na Zytrix, incluindo games, música, tecnologia, esportes e muito mais.">
+<link rel="stylesheet" href="/assets/css/policies.css">
+</head>
+<body>
+  <div data-header></div>
+  <main class="main">
+    <div class="container">
+      <nav aria-label="Breadcrumb" class="muted" style="margin-bottom:18px"><a href="index.html">Início</a> / Categorias</nav>
+      <div class="eyebrow">Navegue e explore</div>
+      <h1 style="font-size:52px;margin:8px 0">Categorias de livestream</h1>
+      <p class="muted">A Zytrix usa categorias e subcategorias para organizar as transmissões e facilitar a descoberta de conteúdo.</p>
+
+      <div class="grid grid-2 section" id="categories-grid"></div>
+
+      <section class="section" aria-labelledby="lista-categorias">
+        <div class="eyebrow">Lista pública</div>
+        <h2 id="lista-categorias">Categorias e subcategorias disponíveis</h2>
+        <div class="grid grid-2">
+          <article class="card panel"><h3>Gaming</h3><p class="muted">Ação / Aventura, RPG, Esportes e Simulação.</p></article>
+          <article class="card panel"><h3>Música</h3><p class="muted">Rock, Sertanejo, Eletrônica e Funk.</p></article>
+          <article class="card panel"><h3>Just Chatting</h3><p class="muted">Bate-Papo, Perguntas e Respostas, Histórias e Desafios.</p></article>
+          <article class="card panel"><h3>Criatividade</h3><p class="muted">Desenho, Design, Fotografia e Edição.</p></article>
+          <article class="card panel"><h3>Esportes</h3><p class="muted">Futebol, Basquete, Automobilismo e Lutas.</p></article>
+          <article class="card panel"><h3>Tecnologia</h3><p class="muted">Programação, Hardware, Inteligência Artificial e Ciência e Tech.</p></article>
+          <article class="card panel"><h3>Podcasts</h3><p class="muted">Conversas, Entrevistas, Notícias e Entretenimento.</p></article>
+          <article class="card panel"><h3>IRL</h3><p class="muted">Viagens, Eventos, Vida Cotidiana e Exploração.</p></article>
+        </div>
+      </section>
+
+      <section class="section grid grid-2">
+        <div class="card panel"><h2>Como as categorias são usadas?</h2><p class="muted">O streamer seleciona uma categoria ao configurar a live. As páginas de descoberta usam essa informação para agrupar transmissões.</p><a href="recursos.html#categorias">Entender o funcionamento →</a></div>
+        <div class="card panel"><h2>Tem dúvidas?</h2><p class="muted">O FAQ explica como assistir, transmitir e configurar uma live.</p><a href="faq.html">Abrir FAQ →</a></div>
+      </section>
+    </div>
+  </main>
+  <div data-footer><footer class="site-footer container"><nav class="governance-links" aria-label="Políticas e segurança"><a href="/termos">Termos</a><a href="/privacidade">Privacidade</a><a href="/diretrizes-da-comunidade">Diretrizes da Comunidade</a><a href="/denuncias-e-moderacao">Denúncias e Moderação</a><a href="/conteudo-proibido">Conteúdo Proibido</a><a href="/politicas">Central de políticas</a></nav></footer></div>
+  <script type="module" src="assets/js/categorias.js"></script>
+  <script type="module" src="assets/js/global-features.js"></script>
+</body>
+</html>

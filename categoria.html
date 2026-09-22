@@ -1,1 +1,59 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Zytrix — Categoria</title><link rel="stylesheet" href="style.css"></head><body><header class="header"><div class="container nav"><a class="logo" href="index.html"><span class="logo-icon">Z</span><span>Zytrix</span></a><nav class="nav-links"><a href="index.html">Início</a><a href="categorias.html">Categorias</a><a href="ao-vivo.html">Ao Vivo</a><a href="sobre.html">Sobre</a></nav><div class="nav-actions"><button class="search-btn" data-search-open>⌕</button><a class="cart-btn" href="loja.html">🛒</a><a class="profile-btn" href="perfil.html">Perfil</a></div></div></header><main><section class="page-hero"><div class="container"><div class="section-label">CATEGORIA</div><h1 id="categoryTitle">Gaming</h1><p>Transmissões relacionadas à categoria selecionada.</p></div></section><section class="page"><div class="container"><div class="featured-grid"><article class="stream-card"><div class="thumb thumb-streamart"><span class="live-tag">AO VIVO</span><span class="views">◉ 5.7K</span><span class="play">▶</span></div><div class="stream-info"><div class="avatar">K</div><div><h3>Kasspas</h3><p>Minha primeira live na Zytrix</p><span>Gaming</span></div></div></article></div></div></section></main><footer class="footer"><div class="container footer-content"><a class="logo" href="index.html"><span class="logo-icon">Z</span><span>Zytrix</span></a><p>© 2026 Zytrix. Todos os direitos reservados.</p><div class="footer-links"><a href="sobre.html">Sobre</a><a href="#">Termos</a><a href="#">Privacidade</a></div></div></footer><div class="search-modal" id="searchModal"><div class="search-box"><button class="close-search" data-search-close>×</button><span class="section-label">PESQUISA</span><h2>O que você quer assistir?</h2><div class="search-input"><span>⌕</span><input id="searchInput" placeholder="Criador, jogo, categoria..."></div><div id="searchResults" class="search-results"></div></div></div><script src="script.js"></script></body></html>
+<!doctype html>
+<html lang="pt-BR">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <title>
+   Zytrix — Categoria
+  </title>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/features.css">
+  <link rel="stylesheet" href="assets/css/platform.css">
+  <meta name="description" content="Explore transmissões ao vivo por categoria e subcategoria na Zytrix.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <link rel="canonical" href="https://zytrix-lives.vercel.app/categoria.html">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Zytrix">
+  <meta property="og:title" content="Zytrix — Categoria">
+  <meta property="og:description" content="Explore transmissões ao vivo por categoria e subcategoria na Zytrix.">
+  <meta property="og:url" content="https://zytrix-lives.vercel.app/categoria.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Zytrix — Categoria">
+  <meta name="twitter:description" content="Explore transmissões ao vivo por categoria e subcategoria na Zytrix.">
+<link rel="stylesheet" href="/assets/css/policies.css">
+</head>
+ <body>
+  <div data-header="">
+  </div>
+  <main class="main">
+   <div class="container">
+    <div style="display:flex;align-items:center;gap:12px">
+     <span class="category-icon" id="category-icon">
+     </span>
+     <div>
+      <div class="eyebrow">
+       Categoria
+      </div>
+      <h1 id="category-title" style="margin:4px 0">
+      </h1>
+     </div>
+    </div>
+    <div class="filters section" id="subcategories">
+    </div>
+    <div class="grid grid-4 section" id="category-lives">
+     <div class="state">
+      Carregando...
+     </div>
+    </div>
+   </div>
+  </main>
+  <div data-footer=""><footer class="site-footer container"><nav class="governance-links" aria-label="Políticas e segurança"><a href="/termos">Termos</a><a href="/privacidade">Privacidade</a><a href="/diretrizes-da-comunidade">Diretrizes da Comunidade</a><a href="/denuncias-e-moderacao">Denúncias e Moderação</a><a href="/conteudo-proibido">Conteúdo Proibido</a><a href="/politicas">Central de políticas</a></nav></footer></div>
+  <script src="assets/js/categoria.js" type="module">
+  </script>
+   <script type="module" src="assets/js/category-follow.js"></script>
+   <script type="module" src="assets/js/global-features.js"></script>
+  <script type="module" src="assets/js/seo-runtime.js"></script>
+</body>
+</html>

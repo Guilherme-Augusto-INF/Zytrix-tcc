@@ -1,1 +1,40 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Zytrix — Live</title><meta name="description" content="Assista, converse e apoie o streamer com Zy Coins."><link rel="stylesheet" href="style.css"></head><body><header class="header"><div class="container nav"><a class="logo" href="index.html"><span class="logo-icon">Z</span><span>Zytrix</span></a><nav class="nav-links"><a href="index.html">Início</a><a href="categorias.html">Categorias</a><a href="ao-vivo.html">Ao Vivo</a><a href="sobre.html">Sobre</a></nav><div class="nav-actions"><button class="search-btn" data-search-open>⌕</button><a class="cart-btn" href="loja.html">🛒</a><a class="profile-btn" href="perfil.html">Perfil</a></div></div></header><main><section class="page"><div class="container"><div class="live-layout"><div><div class="player"><div><div style="font-size:28px">▶</div><div>Player de transmissão</div></div></div><div class="live-details"><div class="section-label">AO VIVO • GAMING</div><h1>Minha primeira live na Zytrix</h1><div class="stream-info"><div class="avatar">K</div><div><h3>Kasspas</h3><p>Criador Zytrix • 5.7K espectadores</p></div></div></div><div class="coin-card"><div class="section-label">ZY COINS</div><h2 style="font-family:'Barlow Condensed';font-size:24px;margin:2px 0">Apoie Kasspas</h2><p style="color:#788598;font-size:8px">Envie Zy Coins diretamente para este streamer durante a transmissão.</p><div class="coin-options"><button class="coin active" data-coin="10">◈ 10</button><button class="coin" data-coin="50">◈ 50</button><button class="coin" data-coin="100">◈ 100</button><button class="coin" data-coin="500">◈ 500</button></div><div id="coinMessage" style="color:#61d8ff;font-size:8px;margin-top:8px">Apoio selecionado: ◈ 10 Zy Coins.</div></div></div><aside class="chat"><div class="chat-head">CHAT AO VIVO</div><div class="chat-body"><div class="chat-msg"><b>LuaVibes</b> boa live!</div><div class="chat-msg"><b>RexPlay</b> salve chat</div></div><form id="chatForm" class="chat-send"><input maxlength="300" placeholder="Enviar mensagem..."><button class="btn btn-primary">Enviar</button></form></aside></div></div></section></main><footer class="footer"><div class="container footer-content"><a class="logo" href="index.html"><span class="logo-icon">Z</span><span>Zytrix</span></a><p>© 2026 Zytrix. Todos os direitos reservados.</p><div class="footer-links"><a href="#">Sobre</a><a href="#">Termos</a><a href="#">Privacidade</a></div></div></footer><div class="search-modal" id="searchModal"><div class="search-box"><button class="close-search" data-search-close>×</button><span class="section-label">PESQUISA</span><h2>O que você quer assistir?</h2><div class="search-input"><span>⌕</span><input id="searchInput" placeholder="Criador, jogo, categoria..."></div><div id="searchResults" class="search-results"></div></div></div><script src="script.js"></script></body></html>
+<!doctype html>
+<html lang="pt-BR">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>Zytrix — Live</title>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/features.css">
+  <link rel="stylesheet" href="assets/css/platform.css">
+  <meta name="description" content="Assista transmissões ao vivo na Zytrix, participe do chat em tempo real e apoie streamers com Zy Coins.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <link rel="canonical" href="https://zytrix-lives.vercel.app/live.html">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Zytrix">
+  <meta property="og:title" content="Zytrix — Live">
+  <meta property="og:description" content="Assista transmissões ao vivo na Zytrix, participe do chat em tempo real e apoie streamers com Zy Coins.">
+  <meta property="og:url" content="https://zytrix-lives.vercel.app/live.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Zytrix — Live">
+  <meta name="twitter:description" content="Assista transmissões ao vivo na Zytrix, participe do chat em tempo real e apoie streamers com Zy Coins.">
+  <link rel="stylesheet" href="/assets/css/policies.css">
+ </head>
+ <body>
+  <div data-header=""></div>
+  <main class="main"><div class="container" id="live-root"><div class="state">Carregando transmissão...</div></div></main>
+  <div data-footer=""><footer class="site-footer container"><nav class="governance-links" aria-label="Políticas e segurança"><a href="/termos">Termos</a><a href="/privacidade">Privacidade</a><a href="/diretrizes-da-comunidade">Diretrizes da Comunidade</a><a href="/denuncias-e-moderacao">Denúncias e Moderação</a><a href="/conteudo-proibido">Conteúdo Proibido</a><a href="/politicas">Central de políticas</a></nav></footer></div>
+  <noscript><div class="container"><div class="message err">O JavaScript precisa estar ativado para usar a página de live da Zytrix.</div></div></noscript>
+  <script src="assets/js/live.js" type="module"></script>
+  <script type="module" src="assets/js/live-support-alerts.js"></script>
+  <script type="module" src="assets/js/live-player-access.js"></script>
+  <script type="module" src="assets/js/live-social.js"></script>
+  <script type="module" src="assets/js/live-extras.js"></script>
+  <script type="module" src="assets/js/live-moderator.js"></script>
+  <script type="module" src="assets/js/live-vod.js"></script>
+  <script type="module" src="assets/js/global-features.js"></script>
+  <script type="module" src="assets/js/seo-runtime.js"></script>
+ </body>
+</html>
