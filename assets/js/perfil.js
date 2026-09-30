@@ -1,6 +1,7 @@
-import { auth, db, googleProvider, onAuthStateChanged, EmailAuthProvider, reauthenticateWithPopup, reauthenticateWithCredential, sendEmailVerification, deleteUser, doc, getDoc, getDocs, deleteDoc, onSnapshot, updateDoc, query, collection, collectionGroup, where, limit, serverTimestamp, writeBatch } from './firebase.js';
+import { auth, db, googleProvider, onAuthStateChanged, EmailAuthProvider, reauthenticateWithPopup, reauthenticateWithCredential, sendEmailVerification, deleteUser, doc, getDoc, getDocs, setDoc, onSnapshot, updateDoc, query, collection, collectionGroup, where, limit, serverTimestamp, writeBatch } from './firebase.js';
 import { header, footer, escapeHtml, escapeAttr } from './ui.js';
 import { parseStreamingSource, streamingPlatformLabel } from './streaming.js';
+import { safeImageUrl } from './security.js';
 header();
 footer();
 const root = document.querySelector('#profile-root');
@@ -52,13 +53,45 @@ async function findStream(uid) {
         ...result.docs[0].data()
     };
 }
+function authProvider() {
+    return user.providerData.some(item => item.providerId === 'google.com') ? 'google' : 'password';
+}
 async function load() {
-    const [profileSnap, accountSnap, walletSnap, channelSnap] = await Promise.all([
-        getDoc(doc(db, 'profiles', user.uid)),
-        getDoc(doc(db, 'users', user.uid)),
+    const profileRef = doc(db, 'profiles', user.uid);
+    const accountRef = doc(db, 'users', user.uid);
+    let [profileSnap, accountSnap, walletSnap, channelSnap] = await Promise.all([
+        getDoc(profileRef),
+        getDoc(accountRef),
         getDoc(doc(db, 'wallets', user.uid)),
         getDoc(doc(db, 'channels', user.uid))
     ]);
+    const repairs = [];
+    if (!accountSnap.exists()) repairs.push(setDoc(accountRef, {
+        uid: user.uid,
+        zytrixId: `ZY-${user.uid.slice(0, 10).toUpperCase()}`,
+        email: user.email || '',
+        provider: authProvider(),
+        createdAt: serverTimestamp(),
+        lastLoginAt: serverTimestamp()
+    }));
+    if (!profileSnap.exists()) {
+        const fallback = user.displayName || user.email?.split('@')[0] || 'Usuário';
+        repairs.push(setDoc(profileRef, {
+            uid: user.uid,
+            username: fallback.length >= 2 ? fallback.slice(0, 30) : 'Usuário',
+            photoURL: safeImageUrl(user.photoURL || ''),
+            bio: '',
+            createdAt: serverTimestamp(),
+            usernameUpdatedAt: serverTimestamp()
+        }));
+    }
+    if (profileSnap.exists() && !profileSnap.data().usernameUpdatedAt) {
+        repairs.push(setDoc(profileRef, { usernameUpdatedAt: serverTimestamp() }, { merge: true }));
+    }
+    if (repairs.length) {
+        await Promise.all(repairs);
+        [profileSnap, accountSnap] = await Promise.all([getDoc(profileRef), getDoc(accountRef)]);
+    }
     profile = profileSnap.exists() ? profileSnap.data() : null;
     account = accountSnap.exists() ? accountSnap.data() : null;
     wallet = walletSnap.exists() ? walletSnap.data() : null;
@@ -89,6 +122,7 @@ function render() {
     }
     const initials = (profile.username || 'U').charAt(0).toUpperCase();
     const streamSource = parseStreamingSource(stream?.playbackURL || '');
+    const profilePhotoURL = safeImageUrl(profile.photoURL || '');
     const platformLabel = streamSource
         ? streamingPlatformLabel(streamSource.platform)
         : 'Não vinculada';
@@ -98,8 +132,7 @@ function render() {
 
       <div class="profile-grid">
         <div>
-          ${profile.photoURL
-        ? `<img class="profile-photo" src="${escapeAttr(profile.photoURL)}" alt="Foto de ${escapeAttr(profile.username || 'usuário')}">`
+          ${profilePhotoURL ? `<img class="profile-photo" src="${escapeAttr(profilePhotoURL)}" referrerpolicy="no-referrer" loading="lazy" decoding="async" alt="Foto de ${escapeAttr(profile.username || 'usuário')}">`
         : `<div class="profile-photo" style="display:grid;place-items:center;font-size:42px;color:#334155">${escapeHtml(initials)}</div>`}
 
           <button id="edit-toggle" class="btn" style="width:140px;margin-top:8px">
@@ -281,7 +314,8 @@ function render() {
 async function saveProfile() {
     const message = document.querySelector('#profile-msg');
     const name = document.querySelector('#edit-name').value.trim();
-    const photoURL = document.querySelector('#edit-photo').value.trim();
+    const photoInput = document.querySelector('#edit-photo').value.trim();
+    const photoURL = safeImageUrl(photoInput);
     const bio = document.querySelector('#edit-bio').value.trim();
     if (name.length < 2 || name.length > 30) {
         message.innerHTML = '<div class="message err">O nome precisa ter entre 2 e 30 caracteres.</div>';
@@ -289,6 +323,10 @@ async function saveProfile() {
     }
     if (bio.length > 500) {
         message.innerHTML = '<div class="message err">A bio pode ter no máximo 500 caracteres.</div>';
+        return;
+    }
+    if (photoInput && !photoURL) {
+        message.innerHTML = '<div class="message err">Use uma URL HTTPS válida para a foto.</div>';
         return;
     }
     if (name !== profile.username && usernameCooldownRemaining() > 0) {
@@ -365,6 +403,10 @@ async function checkVerification() {
 async function createStreamer() {
     const message = document.querySelector('#streamer-msg');
     const input = document.querySelector('#stream-url');
+    if (!user.emailVerified) {
+        message.innerHTML = '<div class="message err">Verifique seu e-mail antes de criar um canal.</div>';
+        return;
+    }
     const source = parseStreamingSource(input.value);
     if (!source) {
         message.innerHTML = `
