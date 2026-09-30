@@ -1,21 +1,20 @@
-import { auth, db, onAuthStateChanged, doc, getDoc, getDocs, query, collection, where, limit, updateDoc, serverTimestamp, writeBatch, ensureWallet } from './firebase.js';
+import { auth, db, onAuthStateChanged, doc, getDoc, getDocs, query, collection, where, limit, updateDoc, serverTimestamp, writeBatch } from './firebase.js';
 import { header, footer, categories, escapeAttr, escapeHtml } from './ui.js';
 import { parseStreamingSource, streamingPlatformLabel } from './streaming.js';
 import { SUPPORT_ALERT_SOUNDS, normalizeSupportAlertSound, playSupportAlertSound, unlockSupportAlertAudio } from './support-alert-sound.js';
+import { safeImageUrl } from './security.js';
 header();
 footer();
 const root = document.querySelector('#config-root');
 let user = null;
 let stream = null;
-let channel = null;
 async function load() {
     const channelSnap = await getDoc(doc(db, 'channels', user.uid));
     if (!channelSnap.exists()) {
         root.innerHTML = '<div class="state">Sua conta ainda não é streamer.</div>';
         return;
     }
-    channel = channelSnap.data();
-    await ensureWallet(user.uid);
+    const channel = channelSnap.data();
     let streamId = channel.currentStreamId || '';
     if (!streamId) {
         const result = await getDocs(query(collection(db, 'streams'), where('streamerUid', '==', user.uid), limit(1)));
@@ -222,17 +221,15 @@ function render() {
 function collectForm({ requireSubcategory = false } = {}) {
     const title = document.querySelector('#title').value.trim();
     const description = document.querySelector('#description').value.trim();
-    const thumbnailURL = document.querySelector('#thumbnail').value.trim();
+    const thumbnailInput = document.querySelector('#thumbnail').value.trim();
+    const thumbnailURL = safeImageUrl(thumbnailInput);
     const category = document.querySelector('#category').value;
     const subcategory = document.querySelector('#subcategory').value;
     const source = parseStreamingSource(document.querySelector('#playback-url').value);
     const supportAlertSound = normalizeSupportAlertSound(document.querySelector('#support-alert-sound')?.value || 'coin');
     const matureContent = document.querySelector('#mature-content')?.checked === true;
-    if (!source) {
-        return {
-            error: 'Informe um link válido do YouTube, Twitch ou Kick.'
-        };
-    }
+    if (!source) return { error: 'Informe um link válido do YouTube, Twitch ou Kick.' };
+    if (thumbnailInput && !thumbnailURL) return { error: 'A thumbnail precisa usar uma URL HTTPS válida.' };
     if (requireSubcategory && !subcategory) {
         return {
             error: 'Selecione uma subcategoria antes de iniciar.'
@@ -252,6 +249,10 @@ function collectForm({ requireSubcategory = false } = {}) {
 }
 async function save() {
     const message = document.querySelector('#config-msg');
+    if (!user.emailVerified) {
+        message.innerHTML = '<div class="message err">Verifique seu e-mail para alterar a live.</div>';
+        return;
+    }
     const form = collectForm();
     if (form.error) {
         message.innerHTML = `<div class="message err">${escapeHtml(form.error)}</div>`;
@@ -284,6 +285,10 @@ async function save() {
 }
 async function toggle() {
     const message = document.querySelector('#config-msg');
+    if (!user.emailVerified) {
+        message.innerHTML = '<div class="message err">Verifique seu e-mail para alterar a live.</div>';
+        return;
+    }
     const starting = stream.status !== 'live';
     const form = collectForm({ requireSubcategory: starting });
     if (form.error) {
