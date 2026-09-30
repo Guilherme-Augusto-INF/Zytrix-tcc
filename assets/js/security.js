@@ -5,19 +5,7 @@ const HOST_GROUPS = Object.freeze({
   kick: ['kick.com', 'www.kick.com', 'player.kick.com'],
   youtube: ['youtube.com', 'www.youtube.com', 'm.youtube.com', 'youtu.be', 'www.youtu.be'],
   instagram: ['instagram.com', 'www.instagram.com'],
-  tiktok: ['tiktok.com', 'www.tiktok.com'],
-  profileImages: [
-    'lh3.googleusercontent.com',
-    'firebasestorage.googleapis.com',
-    'storage.googleapis.com',
-    'static-cdn.jtvnw.net',
-    'clips-media-assets2.twitch.tv',
-    'files.kick.com',
-    'images.kick.com',
-    'i.ytimg.com',
-    'img.youtube.com',
-    'yt3.ggpht.com'
-  ]
+  tiktok: ['tiktok.com', 'www.tiktok.com']
 });
 
 function exactOrSubdomain(hostname, allowed) {
@@ -61,8 +49,7 @@ export function safeSocialUrl(kind, value = '') {
 }
 
 export function safeImageUrl(value = '') {
-  if (!value) return '';
-  return safeHttpsUrl(value, HOST_GROUPS.profileImages);
+  return value ? safeHttpsUrl(value) : '';
 }
 
 export function hardenExternalLink(anchor, value, allowedHosts = []) {
