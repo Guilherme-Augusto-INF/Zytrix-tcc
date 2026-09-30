@@ -1,4 +1,5 @@
 import { auth, onAuthStateChanged } from './firebase.js';
+import { safeImageUrl } from './security.js';
 
 export const interfaceIcons = {
   search: `
@@ -115,7 +116,7 @@ export function footer() {
           <span class="figma-brand-name">Zytrix</span>
         </a>
 
-        <span class="figma-footer-copy">© 2025 Zytrix. Todos os direitos reservados.</span>
+        <span class="figma-footer-copy">© 2026 Zytrix. Todos os direitos reservados.</span>
 
         <nav class="figma-footer-links" aria-label="Links institucionais">
           <a href="sobre.html">Sobre</a>
@@ -130,12 +131,13 @@ export function footer() {
 export function liveCard(live, options = {}) {
   const initial = (live.username || 'S').charAt(0).toUpperCase();
   const selected = options.selected === true;
+  const thumbnailURL = safeImageUrl(live.thumbnailURL || '');
+  const photoURL = safeImageUrl(live.photoURL || '');
 
   return `
     <article class="figma-live-card${selected ? ' selected' : ''}" data-live-id="${escapeAttr(live.id)}" tabindex="0">
       <div class="figma-live-thumb">
-        ${live.thumbnailURL
-          ? `<img src="${escapeAttr(live.thumbnailURL)}" alt="Thumbnail de ${escapeAttr(live.username || 'streamer')}">`
+        ${thumbnailURL ? `<img src="${escapeAttr(thumbnailURL)}" referrerpolicy="no-referrer" loading="lazy" decoding="async" alt="Thumbnail de ${escapeAttr(live.username || 'streamer')}">`
           : `<div class="figma-live-placeholder"><span class="figma-brand-mark">Z</span><strong>ZYTRIX</strong></div>`
         }
 
@@ -145,8 +147,7 @@ export function liveCard(live, options = {}) {
       </div>
 
       <div class="figma-live-meta">
-        ${live.photoURL
-          ? `<img class="figma-live-avatar" src="${escapeAttr(live.photoURL)}" alt="Foto de ${escapeAttr(live.username || 'streamer')}">`
+        ${photoURL ? `<img class="figma-live-avatar" src="${escapeAttr(photoURL)}" referrerpolicy="no-referrer" loading="lazy" decoding="async" alt="Foto de ${escapeAttr(live.username || 'streamer')}">`
           : `<span class="figma-live-avatar">${escapeHtml(initial)}</span>`
         }
         <div class="figma-live-copy">
