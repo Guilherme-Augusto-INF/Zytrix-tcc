@@ -11,26 +11,22 @@ const root = document.querySelector('#live-root');
 let stream = null;
 let streamerProfile = null;
 let user = null;
-let userProfile = null;
 let balance = 0;
 let selectedAmount = 50;
 let walletUnsubscribe = null;
 let chatUnsubscribe = null;
-let lastChatSendAt = 0;
 let chatRenderVersion = 0;
 let currentUserIsAdmin = false;
 let currentChatBan = null;
 let banUnsubscribe = null;
 let pinnedUnsubscribe = null;
 let pinnedMessageId = '';
+let viewerHeartbeat = null;
+let viewerPresenceUid = '';
 const roleCache = new Map();
 const profileCache = new Map();
-// ==================================================
-// AUTENTICAÇÃO + CARTEIRA
-// ==================================================
 onAuthStateChanged(auth, async (currentUser) => {
     user = currentUser;
-    userProfile = null;
     currentUserIsAdmin = false;
     currentChatBan = null;
     if (banUnsubscribe) {
@@ -42,7 +38,6 @@ onAuthStateChanged(auth, async (currentUser) => {
         walletUnsubscribe = null;
     }
     if (user) {
-        userProfile = await getCachedProfile(user.uid);
         currentUserIsAdmin = await isAdminUid(user.uid);
         startOwnBanListener();
         walletUnsubscribe = onSnapshot(doc(db, 'wallets', user.uid), snap => {
@@ -56,10 +51,68 @@ onAuthStateChanged(auth, async (currentUser) => {
         balance = 0;
     }
     updateChatComposerState();
+    syncViewerPresence();
 });
-// ==================================================
-// PERFIS DO CHAT
-// ==================================================
+async function clearViewerPresence() {
+    clearInterval(viewerHeartbeat);
+    viewerHeartbeat = null;
+    const uid = viewerPresenceUid;
+    viewerPresenceUid = '';
+    if (!uid || !streamId) return;
+    const streamRef = doc(db, 'streams', streamId);
+    const viewerRef = doc(db, 'streams', streamId, 'viewers', uid);
+    await runTransaction(db, async tx => {
+        const viewerSnap = await tx.get(viewerRef);
+        if (!viewerSnap.exists()) return;
+        const streamSnap = await tx.get(streamRef);
+        tx.delete(viewerRef);
+        if (streamSnap.exists()) {
+            const count = Math.max(0, Number(streamSnap.data().viewerCount || 0) - 1);
+            tx.update(streamRef, { viewerCount: count });
+        }
+    }).catch(() => {});
+}
+async function joinViewerPresence() {
+    if (!user || !stream || stream.status !== 'live' || !streamId) return;
+    const streamRef = doc(db, 'streams', streamId);
+    const viewerRef = doc(db, 'streams', streamId, 'viewers', user.uid);
+    await runTransaction(db, async tx => {
+        const viewerSnap = await tx.get(viewerRef);
+        const expiresAt = Timestamp.fromMillis(Date.now() + 120000);
+        if (viewerSnap.exists()) {
+            tx.set(viewerRef, { lastSeen: serverTimestamp(), expiresAt }, { merge: true });
+            return;
+        }
+        const streamSnap = await tx.get(streamRef);
+        if (!streamSnap.exists() || streamSnap.data().status !== 'live') return;
+        tx.set(viewerRef, {
+            uid: user.uid,
+            joinedAt: serverTimestamp(),
+            lastSeen: serverTimestamp(),
+            expiresAt
+        });
+        tx.update(streamRef, { viewerCount: Math.max(0, Number(streamSnap.data().viewerCount || 0)) + 1 });
+    });
+    viewerPresenceUid = user.uid;
+}
+async function heartbeatViewerPresence() {
+    if (!viewerPresenceUid || !streamId) return;
+    await setDoc(doc(db, 'streams', streamId, 'viewers', viewerPresenceUid), {
+        lastSeen: serverTimestamp(),
+        expiresAt: Timestamp.fromMillis(Date.now() + 120000)
+    }, { merge: true });
+}
+function syncViewerPresence() {
+    clearInterval(viewerHeartbeat);
+    viewerHeartbeat = null;
+    if (!user || !stream || stream.status !== 'live') {
+        if (viewerPresenceUid) clearViewerPresence();
+        return;
+    }
+    joinViewerPresence().catch(() => {});
+    viewerHeartbeat = setInterval(() => heartbeatViewerPresence().catch(() => {}), 60000);
+}
+
 async function getCachedProfile(uid) {
     if (!uid)
         return { username: 'Usuário', photoURL: '' };
@@ -155,9 +208,6 @@ async function renderPinnedMessage() {
         box.classList.add('hidden');
     }
 }
-// ==================================================
-// INTERFACE DA LIVE
-// ==================================================
 function render() {
     if (!stream)
         return;
@@ -280,9 +330,6 @@ function render() {
         startOwnBanListener();
     updateChatComposerState();
 }
-// ==================================================
-// CHAT EM TEMPO REAL
-// ==================================================
 function bindChatComposer() {
     const input = document.querySelector('#chat-input');
     const sendButton = document.querySelector('#chat-send');
@@ -435,9 +482,13 @@ function renderChatMessages(messages) {
         article.dataset.messageId = message.id;
         const avatar = document.createElement(profile.photoURL ? 'img' : 'span');
         avatar.className = 'chat-avatar';
-        if (profile.photoURL) {
-            avatar.src = profile.photoURL;
+        const avatarURL = safeImageUrl(profile.photoURL || '');
+        if (avatarURL) {
+            avatar.src = avatarURL;
             avatar.alt = username;
+            avatar.referrerPolicy = 'no-referrer';
+            avatar.loading = 'lazy';
+            avatar.decoding = 'async';
         }
         else {
             avatar.textContent = username.charAt(0).toUpperCase();
@@ -587,9 +638,6 @@ async function toggleBanUser(uid) {
     });
     setChatFeedback('Usuário banido do chat.', false);
 }
-// ==================================================
-// APOIO COM ZY COINS
-// ==================================================
 async function support() {
     const msg = document.querySelector('#support-msg');
     if (!user) {
@@ -687,9 +735,6 @@ async function support() {
             : 'Não foi possível enviar o apoio.'}</div>`;
     }
 }
-// ==================================================
-// CARREGAR LIVE
-// ==================================================
 if (!streamId) {
     root.innerHTML = '<div class="state">Live não encontrada. Selecione uma transmissão antes.</div>';
 }
@@ -704,7 +749,16 @@ else {
             ? await getCachedProfile(stream.streamerUid)
             : null;
         render();
+        syncViewerPresence();
     }, () => {
         root.innerHTML = '<div class="state">Erro ao carregar live.</div>';
     });
 }
+
+window.addEventListener('pagehide', () => {
+    clearViewerPresence();
+    walletUnsubscribe?.();
+    chatUnsubscribe?.();
+    banUnsubscribe?.();
+    pinnedUnsubscribe?.();
+});
