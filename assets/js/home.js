@@ -87,7 +87,7 @@ function render() {
     ? filtered.map(item => liveCard(item, { selected: item.id === selectedId })).join('')
     : `
       <div class="figma-state figma-state-plain">
-        <strong>${hasLives ? 'Nenhuma outra live :(' : 'Nenhuma outra live :('}</strong>
+        <strong>Nenhuma outra live :(</strong>
         <span>${hasLives ? 'Tente outro filtro ou volte mais tarde.' : ''}</span>
       </div>
     `;
