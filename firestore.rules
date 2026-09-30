@@ -57,20 +57,7 @@ service cloud.firestore {
     }
 
     function validPublicImageURL(url) {
-      return url is string
-        && url.size() <= 2048
-        && (
-          url == ""
-          || url.matches('^https://([A-Za-z0-9-]+\\.)*googleusercontent\\.com/.*$')
-          || url.matches('^https://firebasestorage\\.googleapis\\.com/.*$')
-          || url.matches('^https://storage\\.googleapis\\.com/.*$')
-          || url.matches('^https://static-cdn\\.jtvnw\\.net/.*$')
-          || url.matches('^https://clips-media-assets2\\.twitch\\.tv/.*$')
-          || url.matches('^https://([A-Za-z0-9-]+\\.)*kick\\.com/.*$')
-          || url.matches('^https://i\\.ytimg\\.com/.*$')
-          || url.matches('^https://img\\.youtube\\.com/.*$')
-          || url.matches('^https://yt3\\.ggpht\\.com/.*$')
-        );
+      return validHttpsURL(url);
     }
 
     function validYouTubeURL(url) {
@@ -1519,6 +1506,18 @@ service cloud.firestore {
                     "bio"
                   ])
             )
+
+            ||
+
+            (
+              !resource.data.keys().hasAll(["usernameUpdatedAt"])
+              && request.resource.data.username == resource.data.username
+              && request.resource.data.usernameUpdatedAt == request.time
+              && request.resource.data
+                  .diff(resource.data)
+                  .affectedKeys()
+                  .hasOnly(["usernameUpdatedAt"])
+            )
           )
         )
 
@@ -1851,6 +1850,55 @@ service cloud.firestore {
                 "raidTargetStreamId",
                 "hostTargetStreamId"
               ])
+        )
+
+        ||
+
+        (
+          verifiedUser()
+
+          && request.resource.data
+              .diff(resource.data)
+              .affectedKeys()
+              .hasOnly(["viewerCount"])
+
+          && request.resource.data.viewerCount
+              is int
+
+          && request.resource.data.viewerCount
+              >= 0
+
+          && (
+            (
+              request.resource.data.viewerCount
+                  == resource.data.viewerCount + 1
+
+              && !exists(
+                /databases/$(database)/documents/streams/$(streamId)/viewers/$(request.auth.uid)
+              )
+
+              && existsAfter(
+                /databases/$(database)/documents/streams/$(streamId)/viewers/$(request.auth.uid)
+              )
+            )
+
+            ||
+
+            (
+              resource.data.viewerCount > 0
+
+              && request.resource.data.viewerCount
+                  == resource.data.viewerCount - 1
+
+              && exists(
+                /databases/$(database)/documents/streams/$(streamId)/viewers/$(request.auth.uid)
+              )
+
+              && !existsAfter(
+                /databases/$(database)/documents/streams/$(streamId)/viewers/$(request.auth.uid)
+              )
+            )
+          )
         )
 
         ||
@@ -3748,7 +3796,14 @@ service cloud.firestore {
           "joinedAt",
           "lastSeen",
           "expiresAt"
-        ]);
+        ])
+
+        && getAfter(
+          /databases/$(database)/documents/streams/$(streamId)
+        ).data.viewerCount
+            == get(
+              /databases/$(database)/documents/streams/$(streamId)
+            ).data.viewerCount + 1;
 
 
       allow update:
@@ -3777,7 +3832,25 @@ service cloud.firestore {
 
 
       allow delete:
-        if isOwner(viewerUid)
+        if
+        (
+          isOwner(viewerUid)
+
+          && (
+            get(
+              /databases/$(database)/documents/streams/$(streamId)
+            ).data.viewerCount == 0
+
+            ||
+
+            getAfter(
+              /databases/$(database)/documents/streams/$(streamId)
+            ).data.viewerCount
+                == get(
+                  /databases/$(database)/documents/streams/$(streamId)
+                ).data.viewerCount - 1
+          )
+        )
 
         || isAdmin()
 
