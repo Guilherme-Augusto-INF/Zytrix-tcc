@@ -24,10 +24,8 @@ const emptyActions = document.querySelector('#home-empty-actions');
 const liveControls = document.querySelector('#home-live-controls');
 const filterWrap = document.querySelector('#home-live-filters');
 const liveSearch = document.querySelector('#home-live-search');
-const watchButton = document.querySelector('#watch-live-button');
 
 let lives = [];
-let selectedId = localStorage.getItem('zytrixSelectedStream') || '';
 let activeFilter = 'Todos';
 let searchTerm = '';
 let stopLives = null;
@@ -48,13 +46,9 @@ filterWrap.innerHTML = ['Todos', ...categoryItems].map(category => `
   </button>
 `).join('');
 
-function setSelected(live) {
-  selectedId = live.id;
+function openLive(live) {
   selectStream(live);
-  watchButton.classList.remove('is-disabled');
-  watchButton.removeAttribute('aria-disabled');
-  watchButton.href = `live.html?stream=${encodeURIComponent(live.id)}`;
-  render();
+  location.href = `live.html?stream=${encodeURIComponent(live.id)}`;
 }
 
 function cardMatches(live) {
@@ -71,10 +65,9 @@ function render() {
   emptyActions.classList.toggle('hidden', hasLives);
   categorySection.classList.toggle('hidden', hasLives);
   liveControls.classList.toggle('hidden', !hasLives);
-  watchButton.parentElement?.classList.toggle('hidden', !hasLives);
 
   featured.innerHTML = top3.length
-    ? top3.map(item => liveCard(item, { selected: item.id === selectedId })).join('')
+    ? top3.map(item => liveCard(item)).join('')
     : `
       <div class="figma-state figma-state-bordered">
         <strong>Não tem ninguém... :(</strong>
@@ -84,23 +77,13 @@ function render() {
 
   const filtered = positions4to7.filter(cardMatches);
   liveNow.innerHTML = filtered.length
-    ? filtered.map(item => liveCard(item, { selected: item.id === selectedId })).join('')
+    ? filtered.map(item => liveCard(item)).join('')
     : `
       <div class="figma-state figma-state-plain">
         <strong>Nenhuma outra live :(</strong>
         <span>${hasLives ? 'Tente outro filtro ou volte mais tarde.' : ''}</span>
       </div>
     `;
-
-  if (selectedId && ordered.some(item => item.id === selectedId)) {
-    watchButton.classList.remove('is-disabled');
-    watchButton.removeAttribute('aria-disabled');
-    watchButton.href = `live.html?stream=${encodeURIComponent(selectedId)}`;
-  } else {
-    watchButton.classList.add('is-disabled');
-    watchButton.setAttribute('aria-disabled', 'true');
-    watchButton.href = 'live.html';
-  }
 
   bindCards();
 }
@@ -109,7 +92,7 @@ function bindCards() {
   document.querySelectorAll('.figma-live-card').forEach(card => {
     const choose = () => {
       const live = lives.find(item => item.id === card.dataset.liveId);
-      if (live) setSelected(live);
+      if (live) openLive(live);
     };
     card.addEventListener('click', choose);
     card.addEventListener('keydown', event => {

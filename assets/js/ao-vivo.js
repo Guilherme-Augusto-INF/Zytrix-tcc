@@ -20,13 +20,11 @@ authGate('Faça login para acessar a aba Ao Vivo');
 let lives = [];
 let filter = 'todos';
 let search = '';
-let selectedId = localStorage.getItem('zytrixSelectedStream') || '';
 let stopLives = null;
 
 const grid = document.querySelector('#lives-grid');
 const filters = document.querySelector('#filters');
 const searchInput = document.querySelector('#search');
-const watchButton = document.querySelector('#live-browser-watch-button');
 
 const names = ['todos', 'Gaming', 'Música', 'Just Chatting', 'Criatividade', 'Esportes', 'Tecnologia', 'Podcasts', 'IRL'];
 
@@ -52,13 +50,9 @@ searchInput.addEventListener('input', event => {
   render();
 });
 
-function chooseLive(live) {
-  selectedId = live.id;
+function openLive(live) {
   selectStream(live);
-  watchButton.href = `live.html?stream=${encodeURIComponent(live.id)}`;
-  watchButton.classList.remove('is-disabled');
-  watchButton.removeAttribute('aria-disabled');
-  render();
+  location.href = `live.html?stream=${encodeURIComponent(live.id)}`;
 }
 
 function render() {
@@ -77,23 +71,13 @@ function render() {
   });
 
   grid.innerHTML = list.length
-    ? list.map(item => liveCard(item, { selected: item.id === selectedId })).join('')
+    ? list.map(item => liveCard(item)).join('')
     : '<div class="figma-state live-browser-empty"><strong>Nenhuma transmissão encontrada.</strong><span>Tente outro filtro ou volte mais tarde.</span></div>';
-
-  if (selectedId && lives.some(item => item.id === selectedId)) {
-    watchButton.href = `live.html?stream=${encodeURIComponent(selectedId)}`;
-    watchButton.classList.remove('is-disabled');
-    watchButton.removeAttribute('aria-disabled');
-  } else {
-    watchButton.href = 'live.html';
-    watchButton.classList.add('is-disabled');
-    watchButton.setAttribute('aria-disabled', 'true');
-  }
 
   grid.querySelectorAll('.figma-live-card').forEach(card => {
     const choose = () => {
       const live = lives.find(item => item.id === card.dataset.liveId);
-      if (live) chooseLive(live);
+      if (live) openLive(live);
     };
     card.addEventListener('click', choose);
     card.addEventListener('keydown', event => {

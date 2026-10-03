@@ -128,14 +128,13 @@ export function footer() {
   `;
 }
 
-export function liveCard(live, options = {}) {
+export function liveCard(live) {
   const initial = (live.username || 'S').charAt(0).toUpperCase();
-  const selected = options.selected === true;
   const thumbnailURL = safeImageUrl(live.thumbnailURL || '');
   const photoURL = safeImageUrl(live.photoURL || '');
 
   return `
-    <article class="figma-live-card${selected ? ' selected' : ''}" data-live-id="${escapeAttr(live.id)}" tabindex="0">
+    <article class="figma-live-card" data-live-id="${escapeAttr(live.id)}" tabindex="0" role="link" aria-label="Assistir ${escapeAttr(live.title || 'Transmissão ao vivo')} de ${escapeAttr(live.username || 'Streamer')}">
       <div class="figma-live-thumb">
         ${thumbnailURL ? `<img src="${escapeAttr(thumbnailURL)}" referrerpolicy="no-referrer" loading="lazy" decoding="async" alt="Thumbnail de ${escapeAttr(live.username || 'streamer')}">`
           : `<div class="figma-live-placeholder"><span class="figma-brand-mark">Z</span><strong>ZYTRIX</strong></div>`
@@ -143,7 +142,7 @@ export function liveCard(live, options = {}) {
 
         <span class="figma-live-badge"><i></i> AO VIVO</span>
         <span class="figma-live-viewers">● ${formatViewers(live.viewerCount)} ESPECTADORES</span>
-        <span class="figma-live-play">${selected ? interfaceIcons.check : interfaceIcons.play}</span>
+        <span class="figma-live-play">${interfaceIcons.play}</span>
       </div>
 
       <div class="figma-live-meta">

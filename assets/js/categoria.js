@@ -16,14 +16,12 @@ footer();
 const params = new URLSearchParams(location.search);
 const category = params.get('categoria') || 'Gaming';
 const sub = params.get('subcategoria') || '';
-let selectedId = localStorage.getItem('zytrixSelectedStream') || '';
 let lives = [];
 
 const title = document.querySelector('#category-title');
 const icon = document.querySelector('#category-icon');
 const subnav = document.querySelector('#subcategories');
 const grid = document.querySelector('#category-lives');
-const watchButton = document.querySelector('#category-watch-button');
 
 title.textContent = sub ? `${category} — ${sub}` : category;
     icon.innerHTML = icons[category] || '';
@@ -38,18 +36,14 @@ subnav.innerHTML =
     </a>
   `).join('');
 
-function chooseLive(live) {
-  selectedId = live.id;
+function openLive(live) {
   selectStream(live);
-  watchButton.href = `live.html?stream=${encodeURIComponent(live.id)}`;
-  watchButton.classList.remove('is-disabled');
-  watchButton.removeAttribute('aria-disabled');
-  render();
+  location.href = `live.html?stream=${encodeURIComponent(live.id)}`;
 }
 
 function render() {
   grid.innerHTML = lives.length
-    ? lives.map(item => liveCard(item, { selected: item.id === selectedId })).join('')
+    ? lives.map(item => liveCard(item)).join('')
     : `
       <div class="figma-state category-empty">
         <strong>Não tem ninguém... :(</strong>
@@ -57,20 +51,10 @@ function render() {
       </div>
     `;
 
-  if (selectedId && lives.some(item => item.id === selectedId)) {
-    watchButton.href = `live.html?stream=${encodeURIComponent(selectedId)}`;
-    watchButton.classList.remove('is-disabled');
-    watchButton.removeAttribute('aria-disabled');
-  } else {
-    watchButton.href = 'live.html';
-    watchButton.classList.add('is-disabled');
-    watchButton.setAttribute('aria-disabled', 'true');
-  }
-
   grid.querySelectorAll('.figma-live-card').forEach(card => {
     const choose = () => {
       const live = lives.find(item => item.id === card.dataset.liveId);
-      if (live) chooseLive(live);
+      if (live) openLive(live);
     };
     card.addEventListener('click', choose);
     card.addEventListener('keydown', event => {

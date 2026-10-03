@@ -323,7 +323,7 @@ body.figma-page {
   outline: none;
 }
 
-.figma-live-card.selected {
+.figma-live-card:focus-visible {
   border-color: rgba(80,200,240,.8);
   box-shadow: 0 0 22px rgba(80,200,240,.12);
 }
